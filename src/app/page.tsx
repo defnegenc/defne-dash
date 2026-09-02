@@ -90,10 +90,10 @@ export default async function Home() {
   void prs;
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-12 sm:px-8 sm:py-16">
-      <h1 className="font-display text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(60,70,150,0.5)] sm:text-5xl">defne dash</h1>
-      <p className="mt-1.5 text-sm text-white/90">{latest}</p>
-      {attention && <p className="mt-1 text-sm text-white">{attention}</p>}
+    <main className="mx-auto max-w-3xl px-6 py-12 sm:px-8 sm:py-16">
+      <h1 className="font-display text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(60,70,150,0.5)] sm:text-6xl">defne dash</h1>
+      <p className="mt-2 text-base text-white/90">{latest}</p>
+      {attention && <p className="mt-1 text-base text-white">{attention}</p>}
 
       <Dash
         news={ranked.map(({ title, source, url }) => ({ title, source, url }))}

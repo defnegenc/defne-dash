@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AeroBg } from "@/components/aero-bg";
+import { SkyCanvas } from "@/components/sky-canvas";
 
 export const metadata: Metadata = {
   title: "defne dash",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=technor@400,700&display=swap" />
       </head>
       <body className="font-sans antialiased">
+        <SkyCanvas />
         <AeroBg />
         {children}
       </body>
