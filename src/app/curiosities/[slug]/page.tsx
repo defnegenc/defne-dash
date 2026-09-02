@@ -37,17 +37,17 @@ export default async function CuriosityPage({
   return (
     <main className="mx-auto max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
       <header className="mb-8">
-        <a href="/curiosities" className="text-xs text-ink-soft hover:text-ink">← curiosities</a>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink">{title}</h1>
-        {lede && <p className="mt-1 text-sm text-ink-soft italic">{lede}</p>}
+        <a href="/curiosities" className="text-xs text-white/90 hover:text-white">← curiosities</a>
+        <h1 className="font-display mt-2 text-2xl font-semibold tracking-tight text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">{title}</h1>
+        {lede && <p className="mt-1 text-sm text-white/90 italic">{lede}</p>}
       </header>
       <div className="flex flex-col gap-4">
         {sections.map((s, i) => (
           <section key={i} className="glass glass-deep p-5 sm:p-6">
-            <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
+            <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90">
               {s.heading}
             </h2>
-            <div className="research text-[15px] leading-relaxed text-ink">
+            <div className="research text-[15px] leading-relaxed text-white/95">
               <ReactMarkdown>{s.body}</ReactMarkdown>
             </div>
           </section>
