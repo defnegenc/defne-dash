@@ -18,8 +18,6 @@ export function AeroBg() {
   const slowY = useTransform(sy, (v) => v * -14);
   const midX = useTransform(sx, (v) => v * 38);
   const midY = useTransform(sy, (v) => v * 26);
-  const fastX = useTransform(sx, (v) => v * 64);
-  const fastY = useTransform(sy, (v) => v * 46);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -34,9 +32,6 @@ export function AeroBg() {
     <>
       <motion.div aria-hidden className="aero-swirl" style={{ x: slowX, y: slowY }} />
       <motion.div aria-hidden className="aero-bloom" style={{ x: midX, y: midY }} />
-      <motion.div aria-hidden className="aero-bubble one" style={{ x: fastX, y: fastY }} />
-      <motion.div aria-hidden className="aero-bubble two" style={{ x: midX, y: midY }} />
-      <motion.div aria-hidden className="aero-bubble three" style={{ x: slowX, y: slowY }} />
     </>
   );
 }
