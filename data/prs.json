@@ -1,0 +1,50 @@
+[
+  {
+    "number": 115,
+    "label": "fixing news mix",
+    "author": "agent",
+    "status": "open",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/115",
+    "openedAt": "2026-09-02T10:07:00-04:00"
+  },
+  {
+    "number": 114,
+    "label": "fixing recency gate",
+    "author": "agent",
+    "status": "merged",
+    "mergedAt": "2026-09-02T10:07:00-04:00",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/114"
+  },
+  {
+    "number": 113,
+    "label": "deck scroll fix",
+    "author": "agent",
+    "status": "merged",
+    "mergedAt": "2026-09-02T10:07:00-04:00",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/113"
+  },
+  {
+    "number": 112,
+    "label": "one visible edition",
+    "author": "agent",
+    "status": "merged",
+    "mergedAt": "2026-09-02T10:07:00-04:00",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/112"
+  },
+  {
+    "number": 110,
+    "label": "fixing paper gate",
+    "author": "agent",
+    "status": "merged",
+    "mergedAt": "2026-09-02T09:33:00-04:00",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/110"
+  },
+  {
+    "number": 109,
+    "label": "strip refusal artifacts",
+    "author": "agent",
+    "status": "merged",
+    "mergedAt": "2026-09-02T09:20:00-04:00",
+    "url": "https://github.com/defnegenc/learning-et-al/pull/109"
+  }
+]

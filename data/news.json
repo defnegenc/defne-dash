@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Daily AI brief",
+    "source": "ai radar",
+    "url": "https://learningetal.com",
+    "engagedAt": "2026-09-02",
+    "kind": "ai-daily",
+    "detail": "Agent-curated AI news, refreshed every day. Pinned to the top."
+  },
+  {
+    "title": "Generative and Malleable UIs with Task-Driven Data Models (Jelly, CHI '25)",
+    "source": "arXiv",
+    "url": "https://arxiv.org/abs/2503.04084",
+    "engagedAt": "2026-09-02",
+    "kind": "topic",
+    "detail": "The paper this dashboard's architecture implements."
+  },
+  {
+    "title": "Model routing: Gemini Flash to all-Anthropic",
+    "source": "learning et al. pipeline",
+    "url": "https://learningetal.com",
+    "engagedAt": "2026-09-01",
+    "kind": "topic",
+    "detail": "Haiku judge, Opus writer; the swap behind this week's hollow-card bug."
+  }
+]
