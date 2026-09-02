@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 /**
- * Living aero background. CSS owns the autonomous drift (spin, float);
- * motion.dev owns pointer parallax at three depths. Transform (parallax)
- * and translate/rotate (CSS keyframes) compose, so nothing fights.
+ * Living dithered-sky background. CSS owns the autonomous cloud drift;
+ * motion.dev owns pointer parallax at two depths. Transform (parallax)
+ * and translate (CSS keyframes) compose, so nothing fights.
  */
 export function AeroBg() {
   const mx = useMotionValue(0);
@@ -30,8 +30,9 @@ export function AeroBg() {
 
   return (
     <>
-      <motion.div aria-hidden className="aero-swirl" style={{ x: slowX, y: slowY }} />
-      <motion.div aria-hidden className="aero-bloom" style={{ x: midX, y: midY }} />
+      <motion.div aria-hidden className="aero-clouds aero-clouds-far" style={{ x: slowX, y: slowY }} />
+      <motion.div aria-hidden className="aero-clouds aero-clouds-near" style={{ x: midX, y: midY }} />
+      <motion.div aria-hidden className="aero-bloom" style={{ x: slowX, y: slowY }} />
     </>
   );
 }
