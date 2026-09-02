@@ -91,9 +91,9 @@ export default async function Home() {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12 sm:px-8 sm:py-16">
-      <h1 className="font-display text-5xl font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(60,70,150,0.5)] sm:text-6xl">defne dash</h1>
-      <p className="mt-2 text-base text-white/90">{latest}</p>
-      {attention && <p className="mt-1 text-base text-white">{attention}</p>}
+      <h1 className="font-display text-6xl font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(60,70,150,0.5)] sm:text-7xl">defne dash</h1>
+      <p className="mt-2 text-lg text-white [text-shadow:0_1px_10px_rgba(20,30,90,0.65)]">{latest}</p>
+      {attention && <p className="mt-1 text-lg font-semibold text-white [text-shadow:0_1px_10px_rgba(20,30,90,0.65)]">{attention}</p>}
 
       <Dash
         news={ranked.map(({ title, source, url }) => ({ title, source, url }))}
