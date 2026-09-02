@@ -27,8 +27,8 @@ const BUCKET_KEY = "defne-dash-buckets-v1";
 
 const DEFAULT_POS: Record<SectionId, Pos> = {
   news: { x: 0, y: 0 },
-  prs: { x: 0, y: 310 },
-  ideas: { x: 0, y: 590 },
+  prs: { x: 0, y: 350 },
+  ideas: { x: 0, y: 660 },
 };
 const SECTION_W = "w-full";
 const LABELS: Record<SectionId, string> = {
@@ -82,15 +82,15 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-chip flex w-full items-center justify-between gap-4 px-5 py-3 text-[15px]"
+            ? "glass-chip flex w-full items-center justify-between gap-4 px-6 py-3.5 text-base"
             : "flex items-center justify-between gap-4 px-1 py-1.5"
         }
       >
-        <span className="text-[15px] font-semibold text-white">
+        <span className="text-base font-semibold text-white">
           {item.title}
-          <span className="ml-2 text-xs text-white/70">{item.source}</span>
+          <span className="ml-2 text-sm font-normal text-white/90">{item.source}</span>
         </span>
-        <span className="text-white/70 transition-transform hover:translate-x-0.5">→</span>
+        <span className="text-white/90 transition-transform hover:translate-x-0.5">→</span>
       </a>
     );
   } else if (block.kind === "pr") {
@@ -100,12 +100,12 @@ function BlockView({
       <a
         href={pr.url}
         onClick={guardClick}
-        className={`glass-chip ${st.tone} inline-flex items-center gap-1.5 whitespace-nowrap px-3.5 py-1.5 text-sm`}
+        className={`glass-chip ${st.tone} inline-flex items-center gap-1.5 whitespace-nowrap px-4 py-2 text-base`}
         title={`${pr.label} · ${pr.author === "agent" ? "agent" : "you"} · ${st.word}`}
       >
         <span className="font-semibold">{st.mark}</span>
         <span className="font-semibold">PR {pr.number}</span>
-        <span className="opacity-80">{pr.label}</span>
+        <span className="opacity-95">{pr.label}</span>
       </a>
     );
   } else {
@@ -116,7 +116,7 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-chip flex w-full items-center gap-2 px-5 py-3 text-[15px] text-white"
+            ? "glass-chip flex w-full items-center gap-2 px-6 py-3.5 text-base font-medium text-white"
             : "px-1 py-1.5 text-sm text-white underline-offset-4 hover:underline"
         }
       >
@@ -254,7 +254,7 @@ export function Dash({
             <GripDots />
           </span>
         )}
-        <h2 className="font-display text-2xl font-semibold lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
+        <h2 className="font-display text-3xl font-semibold lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
           {LABELS[id]}
         </h2>
         <button
@@ -288,7 +288,7 @@ export function Dash({
     );
   }
 
-  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 320;
+  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 340;
 
   return (
     <div className="relative mt-10" style={{ height: boardHeight }}>
