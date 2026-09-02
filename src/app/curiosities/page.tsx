@@ -23,21 +23,21 @@ export default async function Curiosities() {
   return (
     <main className="mx-auto max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
       <header className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight text-ink">Curiosities</h1>
-        <p className="mt-1 text-sm text-ink-soft">Questions being researched. Click one.</p>
+        <h1 className="font-display text-2xl font-semibold tracking-tight text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">Curiosities</h1>
+        <p className="mt-1 text-sm text-white/90">Questions being researched. Click one.</p>
       </header>
       <ul className="flex flex-col gap-4">
         {items.map((c) => (
           <li key={c.slug}>
             <a href={`/curiosities/${c.slug}`} className="glass glass-deep block p-5 transition hover:bg-white/40">
-              <p className="text-[15px] leading-snug font-medium text-ink">{c.question}</p>
-              <p className="mt-1.5 text-xs leading-snug text-ink-soft">{c.tagline}</p>
+              <p className="text-[15px] leading-snug font-medium text-white">{c.question}</p>
+              <p className="mt-1.5 text-xs leading-snug text-white/80">{c.tagline}</p>
             </a>
           </li>
         ))}
       </ul>
       <footer className="mt-8">
-        <a href="/" className="glass-chip inline-block px-3 py-1.5 text-xs font-medium text-ink">
+        <a href="/" className="glass-chip inline-block px-3 py-1.5 text-xs font-medium">
           ← dash
         </a>
       </footer>
