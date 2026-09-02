@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 /**
- * Living dithered-sky background. CSS owns the autonomous cloud drift;
- * motion.dev owns pointer parallax at two depths. Transform (parallax)
- * and translate (CSS keyframes) compose, so nothing fights.
+ * Soft haze bloom over the shader sky. motion.dev owns pointer parallax.
  */
 export function AeroBg() {
   const mx = useMotionValue(0);
@@ -16,8 +14,6 @@ export function AeroBg() {
 
   const slowX = useTransform(sx, (v) => v * -20);
   const slowY = useTransform(sy, (v) => v * -14);
-  const midX = useTransform(sx, (v) => v * 38);
-  const midY = useTransform(sy, (v) => v * 26);
 
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
@@ -28,11 +24,5 @@ export function AeroBg() {
     return () => window.removeEventListener("pointermove", onMove);
   }, [mx, my]);
 
-  return (
-    <>
-      <motion.div aria-hidden className="aero-clouds aero-clouds-far" style={{ x: slowX, y: slowY }} />
-      <motion.div aria-hidden className="aero-clouds aero-clouds-near" style={{ x: midX, y: midY }} />
-      <motion.div aria-hidden className="aero-bloom" style={{ x: slowX, y: slowY }} />
-    </>
-  );
+  return <motion.div aria-hidden className="aero-bloom" style={{ x: slowX, y: slowY }} />;
 }

@@ -27,8 +27,8 @@ const BUCKET_KEY = "defne-dash-buckets-v1";
 
 const DEFAULT_POS: Record<SectionId, Pos> = {
   news: { x: 0, y: 0 },
-  prs: { x: 0, y: 330 },
-  ideas: { x: 0, y: 640 },
+  prs: { x: 0, y: 240 },
+  ideas: { x: 0, y: 440 },
 };
 const SECTION_W = "w-[560px]";
 const LABELS: Record<SectionId, string> = {
@@ -82,15 +82,15 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-inset flex items-center justify-between gap-4 px-4 py-3"
+            ? "glass-chip flex items-center justify-between gap-4 px-4 py-2.5"
             : "flex items-center justify-between gap-4 px-1 py-1.5"
         }
       >
-        <span className={`text-sm ${boxed ? "text-ink" : "text-white drop-shadow-[0_1px_8px_rgba(60,70,150,0.35)]"}`}>
+        <span className="text-sm text-white">
           {item.title}
-          <span className={`ml-2 text-xs ${boxed ? "text-ink-soft" : "text-white/80"}`}>{item.source}</span>
+          <span className="ml-2 text-xs text-white/70">{item.source}</span>
         </span>
-        <span className={`${boxed ? "text-ink-soft" : "text-white/80"} transition-transform hover:translate-x-0.5`}>→</span>
+        <span className="text-white/70 transition-transform hover:translate-x-0.5">→</span>
       </a>
     );
   } else if (block.kind === "pr") {
@@ -116,8 +116,8 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-inset flex items-center gap-2 px-4 py-2.5 text-sm text-ink"
-            : "px-1 py-1.5 text-sm text-white drop-shadow-[0_1px_8px_rgba(60,70,150,0.35)] underline-offset-4 hover:underline"
+            ? "glass-chip flex items-center gap-2 px-4 py-2.5 text-sm text-white"
+            : "px-1 py-1.5 text-sm text-white underline-offset-4 hover:underline"
         }
       >
         → {c.question}
@@ -146,9 +146,7 @@ function BlockView({
       style={{ touchAction: "none" }}
     >
       <span
-        className={`shrink-0 ${
-          boxed ? "text-ink-soft" : "text-white/70"
-        } opacity-0 transition-opacity duration-150 group-hover/block:opacity-80`}
+        className="absolute -left-1 top-1/2 -translate-y-1/2 text-white/70 opacity-0 transition-opacity duration-150 group-hover/block:opacity-90"
         style={{ touchAction: "none" }}
         aria-hidden
       >
@@ -250,9 +248,9 @@ export function Dash({
 
   function header(id: SectionId, draggable: boolean) {
     return (
-      <div className="mb-3 flex items-center gap-2">
+      <div className="relative mb-3 flex items-center gap-2">
         {draggable && (
-          <span className="text-white/70 opacity-0 transition-opacity duration-150 group-hover:opacity-90">
+          <span className="absolute -left-5 text-white/70 opacity-0 transition-opacity duration-150 group-hover:opacity-90">
             <GripDots />
           </span>
         )}
@@ -272,13 +270,9 @@ export function Dash({
   function sectionBlocks(id: SectionId) {
     const blocks = allBlocks.filter((b) => sectionOf(b.id) === id);
     const inner = blocks.map((b) => (
-      <BlockView key={b.id} block={b} boxed={boxed[id]} onDrop={dropBlock} />
+      <BlockView key={b.id} block={b} boxed={true} onDrop={dropBlock} />
     ));
-    return boxed[id] ? (
-      <div className="glass glass-deep flex flex-wrap gap-2 p-4">{inner}</div>
-    ) : (
-      <div className="flex flex-col gap-0.5">{inner}</div>
-    );
+    return <div className="flex flex-wrap gap-2">{inner}</div>;
   }
 
   if (!desktop) {
@@ -294,10 +288,10 @@ export function Dash({
     );
   }
 
-  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 460;
+  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 300;
 
   return (
-    <div className="relative mt-12" style={{ height: boardHeight }}>
+    <div className="relative mt-10" style={{ height: boardHeight }}>
       {SECTION_IDS.map((id) => (
         <motion.div
           key={id}
