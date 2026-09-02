@@ -65,8 +65,8 @@ void main() {
   float cloud = smoothstep(0.545, 0.69, f + detail * 0.24);
   float wisp = smoothstep(0.62, 0.74, fbm(p * 3.2 + vec2(-t * 0.007, t * 0.002) + 3.7));
 
-  vec3 skyTop = vec3(0.10, 0.24, 0.55);
-  vec3 skyBot = vec3(0.18, 0.36, 0.68);
+  vec3 skyTop = vec3(0.13, 0.27, 0.74);
+  vec3 skyBot = vec3(0.36, 0.51, 0.88);
   vec3 col = mix(skyBot, skyTop, uv.y);
   col = mix(col, vec3(1.0), cloud * 0.92);
   col = mix(col, vec3(1.0), wisp * 0.22);

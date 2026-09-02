@@ -27,10 +27,10 @@ const BUCKET_KEY = "defne-dash-buckets-v1";
 
 const DEFAULT_POS: Record<SectionId, Pos> = {
   news: { x: 0, y: 0 },
-  prs: { x: 0, y: 240 },
-  ideas: { x: 0, y: 440 },
+  prs: { x: 0, y: 300 },
+  ideas: { x: 0, y: 500 },
 };
-const SECTION_W = "w-[560px]";
+const SECTION_W = "w-full";
 const LABELS: Record<SectionId, string> = {
   news: "news",
   prs: "pr pile",
@@ -82,7 +82,7 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-chip flex items-center justify-between gap-4 px-4 py-2.5"
+            ? "glass-chip flex w-full items-center justify-between gap-4 px-5 py-3 text-[15px]"
             : "flex items-center justify-between gap-4 px-1 py-1.5"
         }
       >
@@ -100,7 +100,7 @@ function BlockView({
       <a
         href={pr.url}
         onClick={guardClick}
-        className={`glass-chip ${st.tone} px-2.5 py-1 text-xs`}
+        className={`glass-chip ${st.tone} px-3 py-1.5 text-sm`}
         title={`${pr.label} · ${pr.author === "agent" ? "agent" : "you"} · ${st.word}`}
       >
         <span className="mr-1 font-semibold">{st.mark}</span>
@@ -116,7 +116,7 @@ function BlockView({
         onClick={guardClick}
         className={
           boxed
-            ? "glass-chip flex items-center gap-2 px-4 py-2.5 text-sm text-white"
+            ? "glass-chip flex w-full items-center gap-2 px-5 py-3 text-[15px] text-white"
             : "px-1 py-1.5 text-sm text-white underline-offset-4 hover:underline"
         }
       >
@@ -248,13 +248,13 @@ export function Dash({
 
   function header(id: SectionId, draggable: boolean) {
     return (
-      <div className="relative mb-3 flex items-center gap-2">
+      <div className="relative mb-4 flex items-center gap-2">
         {draggable && (
           <span className="absolute -left-5 text-white/70 opacity-0 transition-opacity duration-150 group-hover:opacity-90">
             <GripDots />
           </span>
         )}
-        <h2 className="font-display text-xl lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
+        <h2 className="font-display text-2xl lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
           {LABELS[id]}
         </h2>
         <button
@@ -272,7 +272,7 @@ export function Dash({
     const inner = blocks.map((b) => (
       <BlockView key={b.id} block={b} boxed={true} onDrop={dropBlock} />
     ));
-    return <div className="flex flex-wrap gap-2">{inner}</div>;
+    return <div className="glass glass-deep flex flex-wrap gap-2.5 p-5">{inner}</div>;
   }
 
   if (!desktop) {
@@ -288,7 +288,7 @@ export function Dash({
     );
   }
 
-  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 300;
+  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 340;
 
   return (
     <div className="relative mt-10" style={{ height: boardHeight }}>
