@@ -62,15 +62,15 @@
  */
 body {
   color: var(--color-ink);
-  background-color: #d8ecf0;
+  background-color: #4fb4d8;
   background-image:
-    radial-gradient(rgba(13, 43, 61, 0.055) 1px, transparent 1.4px),
-    radial-gradient(54rem 40rem at 6% -14%, rgba(53, 179, 214, 0.6), transparent 62%),
-    radial-gradient(48rem 36rem at 98% 2%, rgba(92, 184, 74, 0.5), transparent 60%),
-    radial-gradient(62rem 46rem at 50% 114%, rgba(47, 111, 184, 0.5), transparent 64%),
-    radial-gradient(32rem 26rem at 72% 52%, rgba(169, 201, 58, 0.4), transparent 70%),
-    radial-gradient(26rem 20rem at 22% 68%, rgba(79, 201, 168, 0.35), transparent 72%);
-  background-size: 7px 7px, auto, auto, auto, auto, auto;
+    radial-gradient(rgba(13, 43, 61, 0.13) 1.3px, transparent 1.9px),
+    radial-gradient(42rem 42rem at 50% 26%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 68%),
+    radial-gradient(54rem 44rem at 100% 8%, rgba(104, 190, 60, 0.75), transparent 62%),
+    radial-gradient(50rem 42rem at -4% 96%, rgba(8, 68, 138, 0.6), transparent 62%),
+    radial-gradient(38rem 32rem at 84% 92%, rgba(196, 224, 46, 0.65), transparent 66%),
+    radial-gradient(30rem 26rem at 6% 6%, rgba(56, 200, 224, 0.6), transparent 62%);
+  background-size: 6px 6px, auto, auto, auto, auto, auto;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -79,13 +79,13 @@ body {
 .glass {
   background: linear-gradient(
     165deg,
-    rgba(255, 255, 255, 0.42),
-    rgba(255, 255, 255, 0.16) 55%,
-    rgba(255, 255, 255, 0.28)
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.18) 55%,
+    rgba(255, 255, 255, 0.34)
   );
-  backdrop-filter: blur(40px) saturate(1.9) brightness(1.06);
-  -webkit-backdrop-filter: blur(40px) saturate(1.9) brightness(1.06);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(36px) saturate(2.1) brightness(1.08);
+  -webkit-backdrop-filter: blur(36px) saturate(2.1) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 1.5rem;
 }
 
@@ -111,7 +111,7 @@ body {
 
 .glass-chip {
   background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 999px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
@@ -190,17 +190,17 @@ body {
   pointer-events: none;
   background: conic-gradient(
     from 0deg at 62% 34%,
-    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.4),
     transparent 28%,
     rgba(53, 179, 214, 0.14) 52%,
     transparent 74%,
     rgba(169, 201, 58, 0.12) 88%,
-    rgba(255, 255, 255, 0.28)
+    rgba(255, 255, 255, 0.4)
   );
   animation: aero-swirl-spin 90s linear infinite;
 }
 @keyframes aero-swirl-spin {
-  to { transform: rotate(360deg); }
+  to { rotate: 360deg; }
 }
 
 /* Folded-paper type treatment for the Latest line */
@@ -210,9 +210,11 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  letter-spacing: -0.02em;
   filter:
-    drop-shadow(0.045em 0.06em 0 rgba(13, 43, 61, 0.22))
-    drop-shadow(0.09em 0.12em 0 rgba(53, 179, 214, 0.14));
+    drop-shadow(0.05em 0.07em 0 rgba(13, 43, 61, 0.3))
+    drop-shadow(0.1em 0.14em 0 rgba(53, 179, 214, 0.2))
+    drop-shadow(0 0 22px rgba(255, 255, 255, 0.5));
 }
 
 /* Background gloss: big white bloom + floating glossy bubbles */
@@ -241,9 +243,10 @@ body {
     0 24px 60px -30px rgba(13, 43, 61, 0.3);
   animation: bubble-float 14s ease-in-out infinite;
 }
-.aero-bubble.one { width: 13rem; height: 13rem; left: 5%; top: 20%; }
-.aero-bubble.two { width: 7.5rem; height: 7.5rem; right: 8%; top: 60%; animation-delay: -6s; }
+.aero-bubble.one { width: 17rem; height: 17rem; left: 4%; top: 16%; }
+.aero-bubble.two { width: 9rem; height: 9rem; right: 7%; top: 58%; animation-delay: -6s; }
+.aero-bubble.three { width: 5.5rem; height: 5.5rem; left: 62%; top: 78%; animation-delay: -3s; }
 @keyframes bubble-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  0%, 100% { translate: 0 0; }
+  50% { translate: 10px -34px; }
 }
