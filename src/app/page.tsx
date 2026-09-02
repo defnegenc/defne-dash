@@ -96,7 +96,7 @@ export default async function Home() {
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-12 sm:px-8 sm:py-16">
-      <p className="fold font-display text-4xl sm:text-5xl">{latest}</p>
+      <p className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{latest}</p>
       {attention && <p className="mt-1.5 text-sm text-ink-soft">{attention}</p>}
 
       <Dash
