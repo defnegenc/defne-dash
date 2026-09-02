@@ -1,11 +1,10 @@
 @import "tailwindcss";
-@import url("https://api.fontshare.com/v2/css?f[]=hanken-grotesque@400,500,600,700&display=swap");
 
 @theme {
   --color-ink: #0d2b3d;
   --color-ink-soft: #4d7285;
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Display", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
 
   /* bklit chart classes -> palette */
   --color-chart-tooltip-background: var(--chart-tooltip-background);
@@ -53,89 +52,86 @@
 }
 
 /*
- * Aero glass: saturated Frutiger-Aero washes behind heavy glass, halftone dither as the signature texture, minimal layout.
- *
- * The glass only reads as glass if there is something behind it, so the
- * background carries saturated (but calm) aurora washes. Panels layer two
- * levels of translucency: .glass for the panel, .glass-inset for the rows
- * inside it. Tune the whole language here.
+ * Periwinkle line-art: hazy Y2K dream behind white outlined UI, with the
+ * dithered-bitmap-sky energy in the background: two offset dot screens
+ * (dark + white) over banded haze, chunky posterized clouds drifting with
+ * pointer parallax, a couple of sparkles. Tune the whole language here.
  */
 body {
-  color: var(--color-ink);
-  background-color: #4fb4d8;
+  color: #fff;
+  background-color: #5a74d6;
   background-image:
-    radial-gradient(rgba(13, 43, 61, 0.13) 1.3px, transparent 1.9px),
-    radial-gradient(42rem 42rem at 50% 26%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 68%),
-    radial-gradient(54rem 44rem at 100% 8%, rgba(104, 190, 60, 0.75), transparent 62%),
-    radial-gradient(50rem 42rem at -4% 96%, rgba(8, 68, 138, 0.6), transparent 62%),
-    radial-gradient(38rem 32rem at 84% 92%, rgba(196, 224, 46, 0.65), transparent 66%),
-    radial-gradient(30rem 26rem at 6% 6%, rgba(56, 200, 224, 0.6), transparent 62%);
-  background-size: 6px 6px, auto, auto, auto, auto, auto;
+    radial-gradient(rgba(35, 50, 130, 0.20) 1.4px, transparent 2px),
+    radial-gradient(rgba(255, 255, 255, 0.15) 1.4px, transparent 2px),
+    radial-gradient(40rem 30rem at 22% 18%, rgba(255, 255, 255, 0.32), transparent 62%),
+    radial-gradient(36rem 28rem at 82% 12%, rgba(196, 182, 245, 0.5), transparent 60%),
+    radial-gradient(48rem 36rem at 78% 78%, rgba(255, 255, 255, 0.26), transparent 64%),
+    radial-gradient(44rem 34rem at 8% 88%, rgba(96, 120, 210, 0.55), transparent 62%),
+    linear-gradient(180deg, #3d5bd0 0%, #5a74d6 42%, #86a0e6 72%, #aec0f0 100%);
+  background-size: 5px 5px, 7px 7px, auto, auto, auto, auto, auto;
+  background-position: 0 0, 2.5px 3.5px, 0 0, 0 0, 0 0, 0 0, 0 0;
   background-attachment: fixed;
   min-height: 100vh;
 }
 
-/* Primary panel surface */
+/* Primary panel surface: heavy frost, outlined, real presence */
 .glass {
-  background: linear-gradient(
-    165deg,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.18) 55%,
-    rgba(255, 255, 255, 0.34)
-  );
-  backdrop-filter: blur(36px) saturate(2.1) brightness(1.08);
-  -webkit-backdrop-filter: blur(36px) saturate(2.1) brightness(1.08);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(14, 22, 64, 0.52);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 1.5rem;
 }
 
-/* Depth: specular top light + a long soft shadow */
+/* Depth: thick frost glow + inset light */
 .glass-deep {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 10px 24px -14px rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
-    0 24px 60px -24px rgba(15, 38, 56, 0.45),
-    0 4px 14px -6px rgba(15, 38, 56, 0.18);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 12px 30px -12px rgba(255, 255, 255, 0.22),
+    0 0 32px rgba(255, 255, 255, 0.25);
 }
 
-/* Nested surface: rows, chips, stat blocks inside a panel */
+/* Nested surface: defined inner capsules - near-solid, ink text */
 .glass-inset {
-  background: rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 0.9rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
 }
 
 .glass-chip {
-  background: rgba(255, 255, 255, 0.34);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 ::selection {
-  background: rgba(169, 201, 58, 0.4);
+  background: rgba(255, 255, 255, 0.35);
 }
 
-/* Muted staleness tones for the PR pile */
+/* PR pile states in line-art: solid = ready, dashed = stale, ghost = merged */
 .tone-green {
-  background: rgba(92, 184, 74, 0.2);
-  border-color: rgba(92, 184, 74, 0.38);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.85);
 }
 .tone-ready {
-  background: rgba(46, 160, 67, 0.3);
-  border-color: rgba(46, 160, 67, 0.6);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 1);
+}
+.tone-ready span {
+  color: #3d4ea8 !important;
 }
 .tone-stale {
-  background: rgba(204, 142, 20, 0.32);
-  border-color: rgba(204, 142, 20, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.95);
 }
 .tone-gray {
-  background: rgba(148, 163, 175, 0.18);
-  border-color: rgba(148, 163, 175, 0.32);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* Research prose inside curiosity cards */
@@ -151,7 +147,7 @@ body {
 .research a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: #2f6fb8;
+  color: #cdd8ff;
 }
 .research ul {
   margin: 0 0 0.75rem;
@@ -162,62 +158,64 @@ body {
   margin-bottom: 0.35rem;
 }
 
-/* Aero shine: strong gloss highlight on interactive glass */
-.glass, .glass-inset, .glass-chip { position: relative; overflow: hidden; }
-.glass::after, .glass-inset::after, .glass-chip::after {
-  content: "";
-  position: absolute;
-  left: 4%;
-  right: 4%;
-  top: 0;
-  height: 48%;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.08) 70%, transparent);
-  pointer-events: none;
-}
-.glass-chip::after {
-  left: 6%;
-  right: 6%;
-  height: 55%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent);
-}
-
-/* Slow glowy swirl accent behind everything */
-.aero-swirl {
+/* Dithered sky: two cloud depths, posterized chunky blobs, CSS drift
+   composes with motion.dev pointer parallax (translate vs transform). */
+.aero-clouds {
   position: fixed;
-  inset: -30%;
+  inset: -10% -20%;
   z-index: -1;
   pointer-events: none;
-  background: conic-gradient(
-    from 0deg at 62% 34%,
-    rgba(255, 255, 255, 0.4),
-    transparent 28%,
-    rgba(53, 179, 214, 0.14) 52%,
-    transparent 74%,
-    rgba(169, 201, 58, 0.12) 88%,
-    rgba(255, 255, 255, 0.4)
-  );
-  animation: aero-swirl-spin 90s linear infinite;
+  background-repeat: repeat;
 }
-@keyframes aero-swirl-spin {
-  to { rotate: 360deg; }
+.aero-clouds-far {
+  background-image:
+    radial-gradient(12rem 3.2rem at 18% 16%, rgba(255, 255, 255, 0.95), transparent 55%),
+    radial-gradient(7rem 2.2rem at 22% 18%, rgba(255, 255, 255, 0.9), transparent 58%),
+    radial-gradient(15rem 3.6rem at 62% 9%, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(8rem 2.4rem at 68% 11%, rgba(255, 255, 255, 0.85), transparent 58%),
+    radial-gradient(10rem 2.6rem at 88% 26%, rgba(255, 255, 255, 0.8), transparent 55%),
+    radial-gradient(6rem 1.6rem at 40% 24%, rgba(255, 255, 255, 0.55), transparent 58%);
+  filter: blur(1px);
+  opacity: 0.6;
+  animation: cloud-drift-far 140s ease-in-out infinite alternate;
+}
+.aero-clouds-far::after {
+  content: "✦";
+  position: absolute;
+  left: 24%;
+  top: 58%;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+}
+.aero-clouds-near {
+  background-image:
+    radial-gradient(20rem 5.5rem at 12% 34%, rgba(255, 255, 255, 0.95), transparent 58%),
+    radial-gradient(11rem 3.4rem at 17% 36%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(24rem 6rem at 78% 44%, rgba(255, 255, 255, 0.9), transparent 58%),
+    radial-gradient(12rem 3.6rem at 84% 47%, rgba(255, 255, 255, 0.85), transparent 60%),
+    radial-gradient(9rem 2.4rem at 50% 52%, rgba(255, 255, 255, 0.5), transparent 60%);
+  filter: blur(1.5px);
+  opacity: 0.55;
+  animation: cloud-drift-near 90s ease-in-out infinite alternate;
+}
+.aero-clouds-near::after {
+  content: "✦";
+  position: absolute;
+  right: 30%;
+  top: 70%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+}
+@keyframes cloud-drift-far {
+  from { translate: -3% 0; }
+  to { translate: 3% 0.5%; }
+}
+@keyframes cloud-drift-near {
+  from { translate: 4% 0; }
+  to { translate: -4% -1%; }
 }
 
-/* Folded-paper type treatment for the Latest line */
-.fold {
-  font-weight: 700;
-  background: linear-gradient(120deg, #0d2b3d 25%, #2f6fb8 52%, #35b3d6 78%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.02em;
-  filter:
-    drop-shadow(0.05em 0.07em 0 rgba(13, 43, 61, 0.3))
-    drop-shadow(0.1em 0.14em 0 rgba(53, 179, 214, 0.2))
-    drop-shadow(0 0 22px rgba(255, 255, 255, 0.5));
-}
-
-/* Background gloss: big white bloom */
+/* Soft haze bloom */
 .aero-bloom {
   position: fixed;
   z-index: -1;
@@ -227,6 +225,6 @@ body {
   right: -12rem;
   top: -14rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 62%);
+  background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 62%);
   filter: blur(6px);
 }

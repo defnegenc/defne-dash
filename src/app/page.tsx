@@ -60,7 +60,6 @@ export default async function Home() {
   };
   const pile = live.map((p) => ({ ...p, state: state(p) }));
   const mergedToday = live.filter((p) => p.mergedAt?.startsWith(today));
-  const open = live.filter((p) => p.status !== "merged");
   const stale = pile.filter((p) => p.state === "stale");
 
   const latestBits: string[] = [];
@@ -88,16 +87,13 @@ export default async function Home() {
   }
   const attention = attentionBits.length ? `needs you: ${attentionBits.join(" · ")}` : null;
 
-  const fixedLine = `fixed right now: ${mergedToday.length} merged today · not fixed: ${
-    open.length > 0 ? open.map((p) => `PR ${p.number} ${p.label}`).join(", ") : "nothing"
-  }`;
-
   void prs;
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-12 sm:px-8 sm:py-16">
-      <p className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{latest}</p>
-      {attention && <p className="mt-1.5 text-sm text-ink-soft">{attention}</p>}
+      <h1 className="font-display text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(60,70,150,0.5)] sm:text-5xl">defne dash</h1>
+      <p className="mt-1.5 text-sm text-white/90">{latest}</p>
+      {attention && <p className="mt-1 text-sm text-white">{attention}</p>}
 
       <Dash
         news={ranked.map(({ title, source, url }) => ({ title, source, url }))}
@@ -109,7 +105,6 @@ export default async function Home() {
           url,
         }))}
         curiosities={curiosities}
-        fixedLine={fixedLine}
       />
     </main>
   );
