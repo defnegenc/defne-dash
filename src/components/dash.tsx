@@ -27,8 +27,8 @@ const BUCKET_KEY = "defne-dash-buckets-v1";
 
 const DEFAULT_POS: Record<SectionId, Pos> = {
   news: { x: 0, y: 0 },
-  prs: { x: 0, y: 300 },
-  ideas: { x: 0, y: 500 },
+  prs: { x: 0, y: 310 },
+  ideas: { x: 0, y: 590 },
 };
 const SECTION_W = "w-full";
 const LABELS: Record<SectionId, string> = {
@@ -86,7 +86,7 @@ function BlockView({
             : "flex items-center justify-between gap-4 px-1 py-1.5"
         }
       >
-        <span className="text-sm text-white">
+        <span className="text-[15px] font-semibold text-white">
           {item.title}
           <span className="ml-2 text-xs text-white/70">{item.source}</span>
         </span>
@@ -100,12 +100,12 @@ function BlockView({
       <a
         href={pr.url}
         onClick={guardClick}
-        className={`glass-chip ${st.tone} px-3 py-1.5 text-sm`}
+        className={`glass-chip ${st.tone} inline-flex items-center gap-1.5 whitespace-nowrap px-3.5 py-1.5 text-sm`}
         title={`${pr.label} · ${pr.author === "agent" ? "agent" : "you"} · ${st.word}`}
       >
-        <span className="mr-1 font-semibold">{st.mark}</span>
+        <span className="font-semibold">{st.mark}</span>
         <span className="font-semibold">PR {pr.number}</span>
-        <span className="ml-1.5 opacity-80">{pr.label}</span>
+        <span className="opacity-80">{pr.label}</span>
       </a>
     );
   } else {
@@ -254,7 +254,7 @@ export function Dash({
             <GripDots />
           </span>
         )}
-        <h2 className="font-display text-2xl lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
+        <h2 className="font-display text-2xl font-semibold lowercase text-white drop-shadow-[0_1px_10px_rgba(60,70,150,0.45)]">
           {LABELS[id]}
         </h2>
         <button
@@ -272,7 +272,7 @@ export function Dash({
     const inner = blocks.map((b) => (
       <BlockView key={b.id} block={b} boxed={true} onDrop={dropBlock} />
     ));
-    return <div className="glass glass-deep flex flex-wrap gap-2.5 p-5">{inner}</div>;
+    return <div className="glass glass-deep flex flex-wrap gap-3 p-5">{inner}</div>;
   }
 
   if (!desktop) {
@@ -288,7 +288,7 @@ export function Dash({
     );
   }
 
-  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 340;
+  const boardHeight = Math.max(...Object.values(pos).map((p) => p.y)) + 320;
 
   return (
     <div className="relative mt-10" style={{ height: boardHeight }}>
