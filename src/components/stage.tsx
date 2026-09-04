@@ -261,7 +261,7 @@ export function Stage({
       {/* wordmark: very top left, larger, white, straight on the sky - no glass */}
       <div
         className="font-display fixed left-5 top-4 z-50 text-[24px] font-semibold tracking-tight text-white"
-        style={{ textShadow: "0 2px 18px rgba(8, 12, 50, 0.65)" }}
+        style={{ textShadow: "0 1px 2px rgba(6, 10, 44, 0.6), 0 2px 14px rgba(8, 12, 50, 0.9), 0 4px 32px rgba(8, 12, 50, 0.55)" }}
       >
         DEFNE DASH
       </div>
