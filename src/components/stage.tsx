@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import { IdeaMap } from "./idea-map";
 
 export type StagePr = {
   number: number;
@@ -11,6 +12,8 @@ export type StagePr = {
   url: string;
 };
 export type StageCuriosity = { slug: string; question: string; tagline: string };
+export type StageIdeaThread = { id: string; label: string; note: string; status: string };
+export type StageIdeaAxis = { a: string; b: string; side: "a" | "b" | "both" };
 export type SavedRead = { id: string; title: string; url: string; source: string };
 export type StageCard =
   | {
@@ -25,7 +28,17 @@ export type StageCard =
       image?: string;
     }
   | { kind: "prs"; id: string; prs: StagePr[]; url: string; image?: string }
-  | { kind: "hw"; id: string; curiosities: StageCuriosity[]; url: string; image?: string };
+  | { kind: "hw"; id: string; curiosities: StageCuriosity[]; url: string; image?: string }
+  | {
+      kind: "idea";
+      id: string;
+      title: string;
+      thesis: string;
+      question: string;
+      axes: StageIdeaAxis[];
+      threads: StageIdeaThread[];
+      url: string;
+    };
 
 const SAVED_KEY = "defne-dash-saved-v1";
 
@@ -99,6 +112,14 @@ const FAVS = [
 
 
 function statusFor(card: StageCard, savedReads: SavedRead[]): string {
+  if (card.kind === "idea") {
+    const dev = card.threads.filter((t) => t.status === "developing").length;
+    const res = card.threads.filter((t) => t.status === "researching").length;
+    const bits: string[] = [];
+    if (dev) bits.push(`${dev} developing`);
+    if (res) bits.push(`${res} researching`);
+    return `${card.title} - idea store - ${bits.join(" - ")}`;
+  }
   if (card.kind === "news") {
     const saved = savedReads.some((r) => r.id === card.id);
     return `${card.title} - ${card.source}, ${card.date} - ${saved ? "saved to favourites" : "not saved yet"}`;
@@ -229,7 +250,7 @@ export function Stage({
   const current = cards[i];
   const currentUrl = current.url;
   const currentLabel =
-    current.kind === "news" ? current.title : current.kind === "prs" ? "PR pile" : "Curiosity homework";
+    current.kind === "news" || current.kind === "idea" ? current.title : current.kind === "prs" ? "PR pile" : "Curiosity homework";
 
   function sendMsg(e: React.FormEvent) {
     e.preventDefault();
@@ -407,6 +428,47 @@ export function Stage({
                           );
                         })}
                       </ul>
+                    </div>
+                  </>
+                )}
+                {card.kind === "idea" && (
+                  <>
+                    <div className="card-visual card-visual-idea">
+                      <IdeaMap title={card.title} threads={card.threads} />
+                      <span className="card-visual-shade" aria-hidden />
+                      <span className="vchip absolute left-4 top-4">Idea store</span>
+                      <span className="absolute right-4 top-4 flex items-center gap-2">
+                        <span className="vchip vchip-strong">{card.threads.length} threads</span>
+                      </span>
+                    </div>
+                    <div className="vglass-panel flex-1 overflow-y-auto px-5 pb-3 pt-3">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <h3 className="text-[17px] font-semibold leading-snug">{card.title}</h3>
+                        <span className="shrink-0 text-[13px] opacity-70">idea</span>
+                      </div>
+                      <p className="idea-card-thesis mt-1 italic leading-tight opacity-85">{card.thesis}</p>
+                      <ul className="mt-2 flex flex-col gap-1.5">
+                        {card.threads.map((t) => (
+                          <li key={t.id} className={`pr-row thread-row ${t.status === "researching" ? "thread-researching" : "pr-ready"}`}>
+                            <span className="pr-mark">{t.status === "researching" ? "⌕" : "→"}</span>
+                            <span className="min-w-0">
+                              <span className="block truncate font-semibold">{t.label}</span>
+                              <span className="block truncate text-[11.5px] font-normal opacity-80">{t.note}</span>
+                            </span>
+                            <span className="ml-auto shrink-0 text-[12px] opacity-80">{t.status}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="axis-row">
+                        {card.axes.map((x) => (
+                          <span key={`${x.a}-${x.b}`} className="vchip axis">
+                            <span className={x.side === "a" || x.side === "both" ? "axis-on" : "axis-off"}>{x.a}</span>
+                            <span className="axis-sep">⌁</span>
+                            <span className={x.side === "b" || x.side === "both" ? "axis-on" : "axis-off"}>{x.b}</span>
+                          </span>
+                        ))}
+                        <span className="vchip axis axis-question">? {card.question}</span>
+                      </div>
                     </div>
                   </>
                 )}

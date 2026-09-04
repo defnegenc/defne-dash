@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2000s-hardware-nostalgia",
+    "title": "2000s hardware nostalgia",
+    "thesis": "The internet used to be somewhere you went and came back from - bounded, tangible, and it felt like magic.",
+    "question": "why we're nostalgic",
+    "axes": [
+      { "a": "software", "b": "hardware", "side": "b" },
+      { "a": "creation", "b": "consumption", "side": "both" },
+      { "a": "retro", "b": "now", "side": "a" }
+    ],
+    "threads": [
+      { "id": "decommodifying-attention", "label": "decommodifying attention", "note": "my attention isn't ad inventory - own the process and the output", "status": "developing" },
+      { "id": "bounded-tangible", "label": "bounded + tangible", "note": "an album's A/B sides take the decision out; the streaming sea never ends", "status": "developing" },
+      { "id": "hardware-stagnation", "label": "hardware stagnation", "note": "software got cheap to change, so creativity left hardware - now it's an endless factory", "status": "researching" },
+      { "id": "recession-ui", "label": "recession UI", "note": "Frutiger Aero, old Sony: simpler software, somewhere you went and came back from", "status": "developing" }
+    ],
+    "updatedAt": "2026-09-04"
+  }
+]

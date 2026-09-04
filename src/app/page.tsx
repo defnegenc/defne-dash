@@ -22,6 +22,15 @@ type Pr = {
   url: string;
 };
 type Curiosity = { slug: string; question: string; tagline?: string };
+type Idea = {
+  id: string;
+  title: string;
+  thesis: string;
+  question: string;
+  axes: { a: string; b: string; side: "a" | "b" | "both" }[];
+  threads: { id: string; label: string; note: string; status: string }[];
+  updatedAt: string;
+};
 
 async function readJson<T>(file: string): Promise<T> {
   return JSON.parse(
@@ -46,6 +55,7 @@ export default async function Home() {
   const news = await readJson<NewsItem[]>("news.json");
   const prs = await readJson<Pr[]>("prs.json");
   const curiosities = await readJson<Curiosity[]>("curiosities/index.json");
+  const ideas = await readJson<Idea[]>("ideas.json");
   const today = todayNY();
 
   const ranked = [...news].sort((a, b) => {
@@ -96,6 +106,19 @@ export default async function Home() {
   }
   const attention = attentionBits.length ? `needs you: ${attentionBits.join(" · ")}` : null;
 
+  const ideaCards: StageCard[] = ideas.map(
+    (idea): StageCard => ({
+      kind: "idea",
+      id: `idea:${idea.id}`,
+      title: idea.title,
+      thesis: idea.thesis,
+      question: idea.question,
+      axes: idea.axes,
+      threads: idea.threads,
+      url: "/ideas",
+    }),
+  );
+
   const cards: StageCard[] = [
     ...ranked.map(
       (n): StageCard => ({
@@ -140,6 +163,9 @@ export default async function Home() {
       image: "/thumbs/hw.jpg",
     },
   ];
+
+  // the idea store sits right behind the pinned daily brief
+  cards.splice(1, 0, ...ideaCards);
 
   const dateStr = new Date().toLocaleDateString("en-US", {
     weekday: "short",
