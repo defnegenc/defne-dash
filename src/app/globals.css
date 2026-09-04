@@ -317,11 +317,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.35), transparent 55%),
-    linear-gradient(180deg, rgba(70, 76, 208, 0.55), rgba(16, 18, 64, 0.75));
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(26px) saturate(1.5);
+  -webkit-backdrop-filter: blur(26px) saturate(1.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   overflow: hidden;
+}
+.card-visual-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-visual-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 12, 44, 0.22), transparent 30%, transparent 62%, rgba(9, 12, 44, 0.45));
+  pointer-events: none;
+}
+.card-visual-frost {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.22), transparent 55%);
+  pointer-events: none;
 }
 .card-visual::before {
   content: "";
@@ -408,4 +427,36 @@ body {
 }
 .vglass-bar .dot-active {
   background: #161c4a;
+}
+
+/* saved state on chips */
+.vchip-saved {
+  background: rgba(255, 255, 255, 0.85);
+  color: #161c4a;
+  text-shadow: none;
+}
+.vchip {
+  display: inline-flex;
+  align-items: center;
+  transition: background 140ms ease, transform 140ms ease;
+}
+a.vchip:hover, button.vchip:hover {
+  transform: scale(1.05);
+}
+
+/* favourites bar: divider + saved-read letter buttons */
+.fav-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(21, 27, 71, 0.25);
+  margin: 0 2px;
+}
+.md\:flex .fav-divider, nav.flex-col .fav-divider {
+  width: 22px;
+  height: 1px;
+  margin: 2px 0;
+}
+.fav-read {
+  font-size: 13px;
+  font-weight: 700;
 }

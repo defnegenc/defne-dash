@@ -107,6 +107,12 @@ export default async function Home() {
         date: fmtDate(n.engagedAt),
         detail: n.detail,
         itemKind: n.kind,
+        image:
+          n.kind === "ai-daily"
+            ? "/thumbs/news-ai-daily.jpg"
+            : n.url.includes("arxiv.org")
+              ? "/thumbs/news-jelly.jpg"
+              : "/thumbs/news-routing.jpg",
       }),
     ),
     {
@@ -120,6 +126,7 @@ export default async function Home() {
         url,
       })),
       url: "https://github.com/defnegenc/learning-et-al/pulls",
+      image: "/thumbs/prs.jpg",
     },
     {
       kind: "hw",
@@ -130,6 +137,7 @@ export default async function Home() {
         tagline: c.tagline ?? "",
       })),
       url: "/curiosities",
+      image: "/thumbs/hw.jpg",
     },
   ];
 
