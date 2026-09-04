@@ -28,10 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             blur lives here, untouched by the CSS pipeline. Keep values in
             sync with the glass classes in globals.css. */}
         <style>{`
-          .vglass { backdrop-filter: blur(80px) saturate(1.5) brightness(1.07); }
-          .vglass-panel, .vglass-bar { backdrop-filter: blur(80px) saturate(1.5) brightness(1.08); }
-          .vchip { backdrop-filter: blur(40px) saturate(1.5) brightness(1.06); }
-          .card-visual { backdrop-filter: blur(48px) saturate(1.5) brightness(1.06); }
+          .vglass { backdrop-filter: blur(120px) saturate(1.5) brightness(1.07); }
+          .vglass-panel, .vglass-bar { backdrop-filter: blur(120px) saturate(1.5) brightness(1.08); }
+          .vchip { backdrop-filter: blur(64px) saturate(1.5) brightness(1.06); }
+          .card-visual { backdrop-filter: blur(80px) saturate(1.5) brightness(1.06); }
           .glass { backdrop-filter: blur(56px) saturate(1.5) brightness(1.06); }
           .glass-inset { backdrop-filter: blur(40px) saturate(1.3) brightness(1.05); }
           .glass-chip { backdrop-filter: blur(36px) saturate(1.3) brightness(1.05); }

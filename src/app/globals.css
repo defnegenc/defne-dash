@@ -246,12 +246,13 @@ body {
    Smoky frost: near-clear white tint + heavy blur so the digicore sky
    bleeds through, hairline white rim, inner top light, soft floor shadow. */
 .vglass {
-  background: linear-gradient(180deg, rgba(24, 26, 68, 0.34), rgba(24, 26, 68, 0.22));
-  backdrop-filter: blur(80px) saturate(1.5) brightness(1.07);
-  -webkit-backdrop-filter: blur(80px) saturate(1.5) brightness(1.07);
-  border: 1px solid rgba(255, 255, 255, 0.62);
+  background: linear-gradient(180deg, rgba(24, 26, 68, 0.22), rgba(24, 26, 68, 0.13));
+  backdrop-filter: blur(120px) saturate(1.5) brightness(1.07);
+  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.07);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
     inset 0 -12px 24px -12px rgba(255, 255, 255, 0.3),
     0 22px 48px rgba(6, 8, 38, 0.42);
 }
@@ -263,7 +264,10 @@ body {
   top: 0;
   height: 34%;
   border-radius: 28px 28px 50% 50% / 28px 28px 12px 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent);
+  background:
+    radial-gradient(42% 65% at 9% 0%, rgba(255, 255, 255, 0.6), transparent 62%),
+    radial-gradient(42% 65% at 91% 0%, rgba(255, 255, 255, 0.6), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent);
   pointer-events: none;
 }
 .vglass-pill {
@@ -312,8 +316,8 @@ body {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.16);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(40px) saturate(1.5) brightness(1.06);
-  -webkit-backdrop-filter: blur(40px) saturate(1.5) brightness(1.06);
+  backdrop-filter: blur(64px) saturate(1.5) brightness(1.06);
+  -webkit-backdrop-filter: blur(64px) saturate(1.5) brightness(1.06);
   box-shadow: 0 4px 14px rgba(8, 10, 42, 0.25);
 }
 .vchip-strong {
@@ -330,8 +334,8 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(48px) saturate(1.5) brightness(1.06);
-  -webkit-backdrop-filter: blur(48px) saturate(1.5) brightness(1.06);
+  backdrop-filter: blur(80px) saturate(1.5) brightness(1.06);
+  -webkit-backdrop-filter: blur(80px) saturate(1.5) brightness(1.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   overflow: hidden;
 }
@@ -373,8 +377,8 @@ body {
 /* info panel zone under the visual */
 .vglass-panel {
   background: linear-gradient(180deg, rgba(252, 252, 254, 0.34), rgba(248, 248, 252, 0.2));
-  backdrop-filter: blur(80px) saturate(1.5) brightness(1.08);
-  -webkit-backdrop-filter: blur(80px) saturate(1.5) brightness(1.08);
+  backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
+  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
   border-top: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
   text-shadow: 0 1px 10px rgba(8, 12, 50, 0.45);
@@ -420,9 +424,9 @@ body {
 
 /* bars take the pin's light material: milky frost, dark ink foreground */
 .vglass-bar {
-  background: linear-gradient(180deg, rgba(24, 26, 68, 0.42), rgba(24, 26, 68, 0.3));
-  backdrop-filter: blur(80px) saturate(1.5) brightness(1.08);
-  -webkit-backdrop-filter: blur(80px) saturate(1.5) brightness(1.08);
+  background: linear-gradient(180deg, rgba(24, 26, 68, 0.28), rgba(24, 26, 68, 0.18));
+  backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
+  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.7),
