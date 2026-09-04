@@ -165,6 +165,7 @@ export function Stage({
   const [squash, setSquash] = useState(false);
   const [wide, setWide] = useState(true);
   const [savedReads, setSavedReads] = useState<SavedRead[]>([]);
+  const [msg, setMsg] = useState("");
   const n = cards.length;
   const go = (d: number) => {
     setI((v) => (v + d + n) % n);
@@ -208,6 +209,17 @@ export function Stage({
 
   const current = cards[i];
   const currentUrl = current.url;
+  const currentLabel =
+    current.kind === "news" ? current.title : current.kind === "prs" ? "PR pile" : "Curiosity homework";
+
+  function sendMsg(e: React.FormEvent) {
+    e.preventDefault();
+    const text = msg.trim();
+    if (!text) return;
+    const body = `[dash: ${currentLabel}] ${text}`;
+    window.location.href = `sms:+16504440978?&body=${encodeURIComponent(body)}`;
+    setMsg("");
+  }
 
   const favsBar = (
     <>
@@ -426,32 +438,15 @@ export function Stage({
         <button onClick={() => go(-1)} aria-label="Previous card" className="vbtn">
           <Chevron dir="l" />
         </button>
-        <div className="flex min-w-0 flex-1 flex-col items-center gap-1">
-          <span className="truncate text-[13px] font-medium opacity-90">
-            {i + 1} / {n}
-            {" · "}
-            {current.kind === "news"
-              ? current.source
-              : current.kind === "prs"
-                ? "PR pile"
-                : "Curiosity homework"}
-          </span>
-          <span className="flex items-center gap-1.5">
-            {cards.map((c, d) => (
-              <button
-                key={c.id}
-                aria-label={`Card ${d + 1}`}
-                onClick={() => {
-                  setI(d);
-                  setSquash(true);
-                }}
-                className={`h-[5px] rounded-full transition-all ${
-                  d === i ? "w-5 dot dot-active" : "w-[5px] dot hover:opacity-70"
-                }`}
-              />
-            ))}
-          </span>
-        </div>
+        <form onSubmit={sendMsg} className="min-w-0 flex-1">
+          <input
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
+            placeholder="Tell me what to change…"
+            aria-label="Message about the dash"
+            className="dash-input"
+          />
+        </form>
         <a href={currentUrl} aria-label="Open current" className="vbtn">
           ↗
         </a>

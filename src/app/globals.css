@@ -460,3 +460,22 @@ a.vchip:hover, button.vchip:hover {
   font-size: 13px;
   font-weight: 700;
 }
+
+/* bottom-bar message input: composes an iMessage to the agent */
+.dash-input {
+  width: 100%;
+  background: rgba(21, 27, 71, 0.07);
+  border: 1px solid rgba(21, 27, 71, 0.16);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #161c4a;
+  outline: none;
+}
+.dash-input::placeholder {
+  color: rgba(21, 27, 71, 0.45);
+}
+.dash-input:focus {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(21, 27, 71, 0.4);
+}
