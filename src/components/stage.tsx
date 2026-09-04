@@ -97,6 +97,25 @@ const FAVS = [
   { href: "/curiosities", label: "Curiosities", icon: <SparkIcon /> },
 ];
 
+
+function statusFor(card: StageCard, savedReads: SavedRead[]): string {
+  if (card.kind === "news") {
+    const saved = savedReads.some((r) => r.id === card.id);
+    return `${card.title} - ${card.source}, ${card.date} - ${saved ? "saved to favourites" : "not saved yet"}`;
+  }
+  if (card.kind === "prs") {
+    const ready = card.prs.filter((x) => x.state === "ready").length;
+    const stale = card.prs.filter((x) => x.state === "stale").length;
+    const merged = card.prs.filter((x) => x.state === "merged").length;
+    const bits: string[] = [];
+    if (ready) bits.push(`${ready} ready to merge`);
+    if (stale) bits.push(`${stale} stale`);
+    if (merged) bits.push(`${merged} merged`);
+    return `PR pile - ${bits.join(" - ") || "all clear"}`;
+  }
+  return `Curiosity homework - ${card.curiosities.length} open questions`;
+}
+
 function glyphFor(itemKind: string): string {
   if (itemKind === "ai-daily") return "✦";
   if (itemKind === "topic") return "μ";
@@ -239,13 +258,18 @@ export function Stage({
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-24">
-      {/* top bar: summary */}
-      <header className="vglass-bar vglass-pill fixed left-1/2 top-4 z-40 flex w-[min(940px,94vw)] -translate-x-1/2 items-center gap-3 px-5 py-2.5">
-        <span className="font-display shrink-0 text-[17px] font-semibold tracking-tight">
-          DEFNE DASH
-        </span>
-        <span className="vglass-well min-w-0 flex-1 truncate px-4 py-1.5 text-center text-[13px] text-white/90">
-          {summary}
+      {/* wordmark: very top left, larger, white, straight on the sky - no glass */}
+      <div
+        className="font-display fixed left-5 top-4 z-50 text-[24px] font-semibold tracking-tight text-white"
+        style={{ textShadow: "0 2px 18px rgba(8, 12, 50, 0.65)" }}
+      >
+        DEFNE DASH
+      </div>
+
+      {/* top bar: one glass surface, text tracks the centered card */}
+      <header className="vglass-bar vglass-pill fixed left-1/2 top-[68px] md:top-4 z-40 flex w-[min(940px,94vw)] -translate-x-1/2 items-center gap-3 px-5 py-2.5">
+        <span className="min-w-0 flex-1 truncate text-center text-[13px] font-medium">
+          {statusFor(current, savedReads)}
         </span>
         <span className="shrink-0 text-[13px] font-medium opacity-80">{date}</span>
       </header>
@@ -262,7 +286,10 @@ export function Stage({
       {/* card carousel */}
       <div
         className="relative flex w-full max-w-[1120px] items-center justify-center"
-        style={{ perspective: 1500, height: "min(66vh, 560px)", minHeight: 420 }}
+        style={{
+          height: wide ? "min(66vh, 560px)" : "min(80vw, 560px)",
+          minHeight: wide ? 420 : 0,
+        }}
       >
         {cards.map((card, idx) => {
           let off = idx - i;
@@ -275,17 +302,15 @@ export function Stage({
               key={card.id}
               className="absolute"
               style={{
-                width: "min(560px, 88vw)",
+                width: wide ? "min(560px, 88vw)" : "min(80vw, 560px)",
                 height: "100%",
-                transformPerspective: 1500,
                 zIndex: center ? 30 : 20,
                 pointerEvents: center ? "auto" : "none",
               }}
               animate={{
-                x: `${off * (wide ? 66 : 82)}%`,
-                scale: center ? 1 : 0.82,
-                rotateY: off * -14,
-                opacity: center ? 1 : wide ? 0.7 : 0.45,
+                x: `${off * (wide ? 66 : 60)}%`,
+                scale: center ? 1 : wide ? 0.82 : 0.86,
+                opacity: 1,
               }}
               transition={{ type: "spring", stiffness: 240, damping: 26, mass: 1 }}
               drag={center ? "x" : false}
