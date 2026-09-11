@@ -3,8 +3,8 @@
 @theme {
   --color-ink: #0d2b3d;
   --color-ink-soft: #4d7285;
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Clash Display", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Silkscreen", "Tahoma", "MS Sans Serif", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Silkscreen", "Tahoma", "MS Sans Serif", ui-sans-serif, system-ui, sans-serif;
 
   /* bklit chart classes -> palette */
   --color-chart-tooltip-background: var(--chart-tooltip-background);
@@ -13,141 +13,489 @@
   --color-chart-label: var(--chart-label);
 }
 
-/*
- * Chart palette (consumed by the vendored bklit components via var(--chart-*)).
- * Desaturated, tuned to sit inside glass panels.
- */
 :root {
-  --foreground: #0d2b3d;
-  --chart-1: #35b3d6;
-  --chart-2: #2f6fb8;
-  --chart-3: #5cb84a;
-  --chart-4: #a9c93a;
-  --chart-5: #4fc9a8;
+  --foreground: #000;
+  --chart-1: #000080;
+  --chart-2: #1084d0;
+  --chart-3: #008000;
+  --chart-4: #808000;
+  --chart-5: #804000;
   --chart-line-primary: var(--chart-1);
   --chart-line-secondary: var(--chart-2);
-  --chart-grid: rgba(20, 34, 44, 0.08);
+  --chart-grid: rgba(0, 0, 0, 0.15);
   --chart-crosshair: var(--chart-1);
   --chart-brush-border: var(--chart-grid);
-  --chart-foreground: #0d2b3d;
-  --chart-foreground-muted: #4d7285;
+  --chart-foreground: #000;
+  --chart-foreground-muted: #404040;
   --chart-background: transparent;
-  --chart-label: #4d7285;
-  --chart-tooltip-background: rgba(13, 43, 61, 0.88);
-  --chart-tooltip-foreground: #f4f8fa;
-  --chart-tooltip-muted: rgba(244, 248, 250, 0.62);
-  --chart-marker-background: rgba(255, 255, 255, 0.6);
-  --chart-marker-border: rgba(255, 255, 255, 0.7);
-  --chart-marker-foreground: #0d2b3d;
+  --chart-label: #404040;
+  --chart-tooltip-background: #ffffe1;
+  --chart-tooltip-foreground: #000;
+  --chart-tooltip-muted: rgba(0, 0, 0, 0.62);
+  --chart-marker-background: rgba(255, 255, 255, 0.9);
+  --chart-marker-border: #808080;
+  --chart-marker-foreground: #000;
   --chart-marker-badge-background: var(--chart-1);
   --chart-marker-badge-foreground: #ffffff;
-  --chart-segment-background: rgba(255, 255, 255, 0.3);
-  --chart-segment-line: rgba(20, 34, 44, 0.15);
+  --chart-segment-background: rgba(255, 255, 255, 0.6);
+  --chart-segment-line: rgba(0, 0, 0, 0.25);
   --chart-scale-01: #eef9f3;
   --chart-scale-02: #d3f0e2;
   --chart-scale-03: #a3dfc0;
   --chart-scale-04: #6ecd9b;
   --chart-scale-05: #35b3d6;
-  --chart-scale-pattern-color: rgba(255, 255, 255, 0.5);
+  --chart-scale-pattern-color: rgba(0, 0, 0, 0.3);
+
+  /* windows classic chrome */
+  --w-face: #c0c0c0;
+  --w-hilight: #ffffff;
+  --w-light: #dfdfdf;
+  --w-shadow: #808080;
+  --w-dark: #404040;
+  --w-title-a: #000080;
+  --w-title-b: #1084d0;
+  --w-text: #000;
+  --w-select: #000080;
 }
 
-/*
- * Periwinkle line-art: hazy Y2K dream behind white outlined UI, with the
- * dithered-bitmap-sky energy in the background: two offset dot screens
- * (dark + white) over banded haze, chunky posterized clouds drifting with
- * pointer parallax, a couple of sparkles. Tune the whole language here.
- */
+/* classic bevels */
+.w-raised {
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+}
+.w-sunken {
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+}
+.w-sunken-thin {
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-shadow);
+}
+
 body {
   color: #fff;
   background-color: #3d3ab4;
   min-height: 100vh;
 }
 
-/* Primary panel surface: heavy frost, outlined, real presence */
-.glass {
-  position: relative;
-  overflow: hidden;
-  background: rgba(14, 22, 64, 0.48);
-  backdrop-filter: blur(56px) saturate(1.5) brightness(1.06);
-  -webkit-backdrop-filter: blur(56px) saturate(1.5) brightness(1.06);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 1.5rem;
-}
-
-/* Depth: thick frost glow + inset light */
-.glass-deep {
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-    inset 0 12px 30px -12px rgba(255, 255, 255, 0.22),
-    0 0 32px rgba(255, 255, 255, 0.25);
-}
-
-/* Nested surface: defined inner capsules - near-solid, ink text */
-.glass-inset {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(40px) saturate(1.3) brightness(1.05);
-  -webkit-backdrop-filter: blur(40px) saturate(1.3) brightness(1.05);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-}
-
-.glass-chip {
-  position: relative;
-  overflow: hidden;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(6, 10, 44, 0.55), 0 1px 10px rgba(8, 12, 50, 0.85), 0 2px 26px rgba(8, 12, 50, 0.5);
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(36px) saturate(1.3) brightness(1.05);
-  -webkit-backdrop-filter: blur(36px) saturate(1.3) brightness(1.05);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-}
-
-/* glass shine: visible top-light gloss so the glass reads as glass */
-.glass::after, .glass-chip::after {
-  content: "";
-  position: absolute;
-  left: 3%;
-  right: 3%;
-  top: 0;
-  height: 46%;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03) 70%, transparent);
-  pointer-events: none;
-}
-.glass-chip::after {
-  height: 55%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent);
+/* every interactive surface talks classic: square, gray, black text */
+button, input, select, textarea, a {
+  font-family: "Silkscreen", "Tahoma", "MS Sans Serif", ui-sans-serif, sans-serif;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.35);
+  background: var(--w-select);
+  color: #fff;
 }
 
-/* PR pile states in line-art: solid = ready, dashed = stale, ghost = merged */
-.tone-green {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.85);
+/* classic scrollbars */
+*::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
 }
-.tone-ready {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 255, 255, 1);
+*::-webkit-scrollbar-track {
+  background: var(--w-light);
+  background-image:
+    linear-gradient(45deg, var(--w-face) 25%, transparent 25%, transparent 75%, var(--w-face) 75%),
+    linear-gradient(45deg, var(--w-face) 25%, transparent 25%, transparent 75%, var(--w-face) 75%);
+  background-size: 2px 2px;
+  background-position: 0 0, 1px 1px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--w-face);
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+}
+
+/* ---------- windows: cards are windows ---------- */
+.vglass {
+  position: relative;
+  background: var(--w-face);
+  border: none;
+  border-radius: 0;
+  color: var(--w-text);
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light),
+    8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+.vglass-pill {
+  border-radius: 0;
+}
+.vglass-card {
+  border-radius: 0;
+}
+.vglass-card::after {
+  content: none;
+}
+
+/* window title bar */
+.wtitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  margin: 2px 2px 0;
+  padding: 0 2px 0 6px;
+  background: linear-gradient(90deg, var(--w-title-a), var(--w-title-b));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.wtitle-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wtitle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 16px;
+  background: var(--w-face);
+  color: #000;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+}
+
+/* client area under the title bar */
+.vglass-panel {
+  background: var(--w-face);
+  border-top: none;
+  color: var(--w-text);
+  text-shadow: none;
+}
+
+/* bars (header / footer / favourites) -> classic raised toolbars */
+.vglass-bar {
+  background: var(--w-face);
+  border: none;
+  border-radius: 0;
+  color: var(--w-text);
+  text-shadow: none;
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light),
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+.vglass-bar .dot {
+  background: var(--w-shadow);
+}
+.vglass-bar .dot-active {
+  background: var(--w-dark);
+}
+
+/* ---------- classic push buttons ---------- */
+.vbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 0;
+  background: var(--w-face);
+  color: #000;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+  transition: none;
+}
+.vbtn:hover {
+  background: var(--w-face);
+  transform: none;
+}
+.vbtn:active {
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+}
+.vbtn:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -5px;
+}
+.vglass-bar .vbtn {
+  color: #000;
+  background: var(--w-face);
+}
+.vglass-bar .vbtn:hover {
+  background: var(--w-face);
+}
+
+/* ---------- chips -> small classic buttons ---------- */
+.vchip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000;
+  text-shadow: none;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 0;
+  background: var(--w-face);
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+  cursor: pointer;
+  transition: none;
+}
+.vchip:active {
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+}
+a.vchip:hover, button.vchip:hover {
+  transform: none;
+}
+.vchip-strong {
+  background: var(--w-face);
+  outline: 1px solid #000;
+  outline-offset: -4px;
+}
+.vchip-saved {
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+  color: #000;
+}
+
+/* ---------- card visual zone: sunken picture frame ---------- */
+.card-visual {
+  position: relative;
+  height: 56%;
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-bottom: none;
+  overflow: hidden;
+  margin: 2px 2px 0;
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+}
+.card-visual-img {
+  position: absolute;
+  inset: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  object-fit: cover;
+}
+.card-visual-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 30%, transparent 70%, rgba(0, 0, 0, 0.28));
+  pointer-events: none;
+}
+.card-visual-frost {
+  content: none;
+}
+.card-visual::before {
+  content: none;
+}
+.card-visual-glyph {
+  font-size: 84px;
+  line-height: 1;
+  color: #000080;
+}
+
+/* ---------- list rows -> classic listbox items ---------- */
+.pr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 0;
+  font-size: 13px;
+  color: #000;
+  background: #fff;
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-shadow);
+  transition: none;
+}
+.pr-row:hover {
+  background: var(--w-select);
+  color: #fff;
+  transform: none;
+}
+.pr-row:hover span {
+  color: #fff !important;
+}
+.pr-mark {
+  font-weight: 700;
+  width: 16px;
+  text-align: center;
+}
+.pr-ready {
+  background: #fff;
+}
+.pr-ready .pr-mark {
+  color: #008000;
+}
+.pr-stale {
+  background: #fff;
+}
+.pr-stale .pr-mark {
+  color: #9c6500;
+}
+.pr-merged {
+  background: #fff;
+  color: #808080;
+  text-shadow: none;
+}
+.pr-merged .pr-mark {
+  color: #808080;
+}
+
+/* ---------- inputs -> sunken white fields ---------- */
+.dash-input {
+  width: 100%;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: #000;
+  outline: none;
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-dark),
+    inset -2px -2px var(--w-light),
+    inset 2px 2px var(--w-shadow);
+}
+.dash-input::placeholder {
+  color: #808080;
+}
+.dash-input:focus {
+  background: #fff;
+}
+
+/* favourites bar: divider + saved-read letter buttons */
+.fav-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--w-shadow);
+  margin: 0 2px;
+}
+.md\:flex .fav-divider, nav.flex-col .fav-divider {
+  width: 22px;
+  height: 1px;
+  margin: 2px 0;
+}
+.fav-read {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- generic glass (subpages) -> classic panels ---------- */
+.glass {
+  position: relative;
+  overflow: hidden;
+  background: var(--w-face);
+  border: none;
+  border-radius: 0;
+  color: #000;
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light),
+    8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+.glass, .glass * {
+  color: #000;
+}
+.glass a {
+  color: #000080;
+  text-decoration: underline;
+}
+.glass::after {
+  content: none;
+}
+.glass-deep {
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light),
+    8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+.glass-inset {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    inset -1px -1px var(--w-hilight),
+    inset 1px 1px var(--w-shadow);
+}
+.glass-chip {
+  position: relative;
+  color: #000;
+  text-shadow: none;
+  background: var(--w-face);
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    inset -1px -1px var(--w-dark),
+    inset 1px 1px var(--w-hilight),
+    inset -2px -2px var(--w-shadow),
+    inset 2px 2px var(--w-light);
+}
+
+/* tone helpers kept for any class users */
+.tone-green, .tone-ready, .tone-stale, .tone-gray {
+  background: var(--w-face);
+  border-color: var(--w-shadow);
 }
 .tone-ready span {
-  color: #3d4ea8 !important;
-}
-.tone-stale {
-  background: rgba(255, 255, 255, 0.08);
-  border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.95);
-}
-.tone-gray {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.35);
-  color: rgba(255, 255, 255, 0.72);
+  color: #000 !important;
 }
 
-/* Research prose inside curiosity cards */
+/* research prose */
 .research p {
   margin: 0 0 0.75rem;
 }
@@ -155,12 +503,12 @@ body {
   margin-bottom: 0;
 }
 .research strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 .research a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: #cdd8ff;
+  color: #000080;
 }
 .research ul {
   margin: 0 0 0.75rem;
@@ -171,8 +519,7 @@ body {
   margin-bottom: 0.35rem;
 }
 
-/* Dithered sky: two cloud depths, posterized chunky blobs, CSS drift
-   composes with motion.dev pointer parallax (translate vs transform). */
+/* dithered sky, unchanged */
 .aero-clouds {
   position: fixed;
   inset: -10% -20%;
@@ -228,7 +575,6 @@ body {
   to { translate: -4% -1%; }
 }
 
-/* Soft haze bloom */
 .aero-bloom {
   position: fixed;
   z-index: -1;
@@ -242,271 +588,14 @@ body {
   filter: blur(6px);
 }
 
-/* ---- visionOS glass (pin reference, copied 1:1 in spirit) ----
-   Smoky frost: near-clear white tint + heavy blur so the digicore sky
-   bleeds through, hairline white rim, inner top light, soft floor shadow. */
-.vglass {
-  background: linear-gradient(180deg, rgba(24, 26, 68, 0.22), rgba(24, 26, 68, 0.13));
-  backdrop-filter: blur(120px) saturate(1.5) brightness(1.07);
-  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.07);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-    inset 0 -12px 24px -12px rgba(255, 255, 255, 0.3),
-    0 22px 48px rgba(6, 8, 38, 0.42);
-}
-.vglass-card::after {
-  content: "";
-  position: absolute;
-  left: 2%;
-  right: 2%;
-  top: 0;
-  height: 34%;
-  border-radius: 28px 28px 50% 50% / 28px 28px 12px 12px;
-  background:
-    radial-gradient(42% 65% at 9% 0%, rgba(255, 255, 255, 0.6), transparent 62%),
-    radial-gradient(42% 65% at 91% 0%, rgba(255, 255, 255, 0.6), transparent 62%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent);
-  pointer-events: none;
-}
-.vglass-pill {
-  border-radius: 999px;
-}
-.vglass-card {
-  border-radius: 34px;
-}
-
-/* inset well inside the top bar (the pin's url field) */
-.vglass-well {
-  background: rgba(10, 14, 48, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  box-shadow: inset 0 2px 6px rgba(6, 8, 38, 0.35);
-}
-
-/* round glass buttons (pin's toolbar icons) */
-.vbtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  transition: background 140ms ease, transform 140ms ease;
-}
-.vbtn:hover {
-  background: rgba(255, 255, 255, 0.28);
-  transform: scale(1.06);
-}
-.vbtn:active {
-  transform: scale(0.96);
-}
-
-/* small chips on the card visual zone (pin's Expand / dots) */
-.vchip {
-  font-size: 12px;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(6, 10, 44, 0.55), 0 1px 9px rgba(8, 12, 50, 0.85), 0 2px 22px rgba(8, 12, 50, 0.5);
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(64px) saturate(1.5) brightness(1.06);
-  -webkit-backdrop-filter: blur(64px) saturate(1.5) brightness(1.06);
-  box-shadow: 0 4px 14px rgba(8, 10, 42, 0.25);
-}
-.vchip-strong {
-  background: rgba(255, 255, 255, 0.28);
-}
-
-/* card visual zone: digicore dither swatch, darker at the bottom so the
-   info panel melts in like the pin's painting -> caption gradient */
-.card-visual {
-  position: relative;
-  height: 56%;
-  min-height: 170px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(80px) saturate(1.5) brightness(1.06);
-  -webkit-backdrop-filter: blur(80px) saturate(1.5) brightness(1.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-  overflow: hidden;
-}
-.card-visual-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.card-visual-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(10, 12, 44, 0.42), transparent 34%, transparent 60%, rgba(9, 12, 44, 0.5));
-  pointer-events: none;
-}
-.card-visual-frost {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.22), transparent 55%);
-  pointer-events: none;
-}
-.card-visual::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1.5px);
-  background-size: 5px 5px;
-  opacity: 0.35;
-  mix-blend-mode: overlay;
-}
-.card-visual-glyph {
-  font-size: 84px;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 4px 30px rgba(10, 14, 60, 0.6);
-}
-
-/* info panel zone under the visual */
-.vglass-panel {
-  background: linear-gradient(180deg, rgba(20, 24, 72, 0.12), rgba(20, 24, 72, 0.2)), linear-gradient(180deg, rgba(252, 252, 254, 0.34), rgba(248, 248, 252, 0.2));
-  backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
-  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(6, 10, 44, 0.6), 0 1px 10px rgba(8, 12, 50, 0.9), 0 2px 28px rgba(8, 12, 50, 0.55);
-}
-
-/* list rows inside pr / homework cards: glass capsules */
-.pr-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 14px;
-  border-radius: 14px;
-  font-size: 14px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: background 140ms ease, transform 140ms ease;
-}
-.pr-row:hover {
-  background: rgba(255, 255, 255, 0.24);
-  transform: translateX(2px);
-}
-.pr-mark {
-  font-weight: 700;
-  width: 16px;
-  text-align: center;
-}
-.pr-ready {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-.pr-stale {
-  border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.08);
-}
-.pr-merged {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.55);
-  text-shadow: none;
-}
-
-/* bars take the pin's light material: milky frost, dark ink foreground */
-.vglass-bar {
-  background: linear-gradient(180deg, rgba(24, 26, 68, 0.28), rgba(24, 26, 68, 0.18));
-  backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
-  -webkit-backdrop-filter: blur(120px) saturate(1.5) brightness(1.08);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 18px 40px rgba(6, 8, 38, 0.35);
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(6, 10, 44, 0.6), 0 1px 10px rgba(8, 12, 50, 0.9), 0 2px 28px rgba(8, 12, 50, 0.55);
-}
-.vglass-bar .vbtn {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-.vglass-bar .vbtn:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-.vglass-bar .dot {
-  background: rgba(255, 255, 255, 0.35);
-}
-.vglass-bar .dot-active {
-  background: #fff;
-}
-
-/* saved state on chips */
-.vchip-saved {
-  background: rgba(255, 255, 255, 0.34);
-  color: #fff;
-}
-.vchip {
-  display: inline-flex;
-  align-items: center;
-  transition: background 140ms ease, transform 140ms ease;
-}
-a.vchip:hover, button.vchip:hover {
-  transform: scale(1.05);
-}
-
-/* favourites bar: divider + saved-read letter buttons */
-.fav-divider {
-  width: 1px;
-  height: 22px;
-  background: rgba(21, 27, 71, 0.25);
-  margin: 0 2px;
-}
-.md\:flex .fav-divider, nav.flex-col .fav-divider {
-  width: 22px;
-  height: 1px;
-  margin: 2px 0;
-}
-.fav-read {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-/* bottom-bar message input: composes an iMessage to the agent */
-.dash-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 13px;
-  color: #fff;
-  outline: none;
-}
-.dash-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-.dash-input:focus {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* mobile square cards: let the visual zone shrink so 1:1 cards fit */
+/* mobile square cards */
 @media (max-width: 899px) {
   .card-visual {
     min-height: 0;
   }
 }
 
-/* idea store: mind-map constellation visual + segmentation axes */
+/* idea store: classic-ink constellation on white */
 .idea-map {
   position: absolute;
   inset: 0;
@@ -515,39 +604,39 @@ a.vchip:hover, button.vchip:hover {
 }
 .idea-edge {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.6);
+  stroke: #808080;
   stroke-width: 1.2;
 }
 .idea-edge-glow {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.35);
+  stroke: #dfdfdf;
   stroke-width: 4;
 }
 .idea-node {
-  fill: rgba(255, 255, 255, 0.1);
-  stroke: rgba(255, 255, 255, 0.8);
+  fill: #fff;
+  stroke: #000;
   stroke-width: 1.1;
 }
 .idea-node-core {
-  fill: rgba(255, 255, 255, 0.16);
-  stroke: rgba(255, 255, 255, 0.95);
+  fill: #000080;
+  stroke: #000;
   stroke-width: 1.3;
 }
 .idea-node-dashed {
   stroke-dasharray: 5 4;
-  stroke: rgba(255, 255, 255, 0.65);
+  stroke: #404040;
 }
 .idea-rim {
-  stroke: rgba(255, 255, 255, 0.95);
+  stroke: #000;
   stroke-width: 1.4;
   stroke-linecap: round;
 }
 .idea-node-text {
-  fill: #fff;
+  fill: #000;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   paint-order: stroke;
-  stroke: rgba(8, 12, 50, 0.85);
+  stroke: #fff;
   stroke-width: 2.2px;
 }
 .idea-core-text {
@@ -555,13 +644,12 @@ a.vchip:hover, button.vchip:hover {
   font-size: 13.5px;
   font-weight: 700;
   paint-order: stroke;
-  stroke: rgba(8, 12, 50, 0.85);
+  stroke: #000080;
   stroke-width: 2.6px;
 }
 .thread-researching {
   border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.1);
+  background: #fff;
 }
 .axis-row {
   display: flex;
@@ -569,7 +657,7 @@ a.vchip:hover, button.vchip:hover {
   gap: 5px;
   margin-top: 9px;
   padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid var(--w-shadow);
 }
 .axis {
   display: inline-flex;
@@ -581,31 +669,210 @@ a.vchip:hover, button.vchip:hover {
   white-space: nowrap;
 }
 .axis-on {
-  color: #fff;
+  color: #000;
   font-weight: 700;
 }
 .axis-off {
-  color: rgba(255, 255, 255, 0.45);
-  font-weight: 500;
+  color: #808080;
+  font-weight: 400;
 }
 .axis-sep {
-  color: rgba(255, 255, 255, 0.5);
+  color: #808080;
   font-size: 9px;
 }
 .axis-question {
-  border-style: dashed;
-  color: #fff;
-  font-weight: 600;
+  color: #000;
+  font-weight: 700;
 }
 
-/* idea card compaction: map gets less vertical, threads stay on one screen */
 .card-visual-idea {
   height: 38%;
   min-height: 124px;
+  background: #fff;
 }
 .thread-row {
-  padding: 6px 12px;
+  padding: 6px 10px;
 }
 .idea-card-thesis {
   font-size: 12.5px;
+}
+
+/* ---------- nokia flip-phone loading screen ---------- */
+.phone-intro-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* dash content: starts as the phone screen hole, grows to fullscreen */
+.phone-content {
+  position: relative;
+  overflow: hidden;
+  z-index: 101;
+  background: #3d3ab4;
+}
+.phone-viewport {
+  transform-origin: top left;
+  overflow: hidden;
+}
+.phone-stage {
+  overflow: hidden;
+}
+
+/* the phone itself: 252x480, hard-stepped pixel shading, no soft gradients */
+.phone-shell {
+  position: absolute;
+  width: 252px;
+  height: 480px;
+  z-index: 102;
+  pointer-events: none;
+  image-rendering: pixelated;
+  transform-origin: 50% 32.9%; /* zoom out from the screen hole center */
+  filter: drop-shadow(10px 12px 0 rgba(0, 0, 0, 0.3));
+}
+
+/* silver lid in four strips around the 176x220 hole at (38,48) */
+.phone-lid-top {
+  position: absolute;
+  left: 0; top: 0; width: 252px; height: 48px;
+  background: #d4d8e0;
+  border-left: 3px solid #f2f4f8;
+  border-top: 3px solid #f2f4f8;
+  border-right: 3px solid #8b909c;
+  box-shadow: inset 0 -4px 0 #b7bcc8;
+}
+.phone-lid-left {
+  position: absolute;
+  left: 0; top: 48px; width: 38px; height: 220px;
+  background: #ccd1da;
+  border-left: 3px solid #f2f4f8;
+  box-shadow: inset -4px 0 0 #b7bcc8;
+}
+.phone-lid-right {
+  position: absolute;
+  left: 214px; top: 48px; width: 38px; height: 220px;
+  background: #b7bcc8;
+  border-right: 3px solid #8b909c;
+}
+.phone-lid-bottom {
+  position: absolute;
+  left: 0; top: 268px; width: 252px; height: 14px;
+  background: #aab0bc;
+  border-left: 3px solid #f2f4f8;
+  border-right: 3px solid #8b909c;
+}
+/* dark bezel ring hugging the hole */
+.phone-bezel {
+  position: absolute;
+  left: 34px; top: 44px; width: 184px; height: 228px;
+  background: transparent;
+  border: 4px solid #14181e;
+  box-shadow: inset 0 0 0 2px #3a4048;
+}
+.phone-brand {
+  position: absolute;
+  top: 8px; left: 0; width: 252px;
+  text-align: center;
+  font-family: "Silkscreen", monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #6a707c;
+}
+.phone-speaker {
+  position: absolute;
+  top: 28px; left: 106px; width: 40px; height: 8px;
+  background: #14181e;
+  box-shadow:
+    -12px 0 0 -2px #14181e,
+    12px 0 0 -2px #14181e,
+    inset 0 2px 0 #3a4048;
+}
+
+/* hinge barrel */
+.phone-hinge {
+  position: absolute;
+  top: 282px; left: 0; width: 252px; height: 20px;
+  background: #9aa0ac;
+  border-left: 3px solid #f2f4f8;
+  border-right: 3px solid #8b909c;
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 18px;
+}
+.phone-hinge span {
+  width: 52px; height: 14px;
+  background: #7d828e;
+  box-shadow: inset 0 3px 0 #5c616c, inset 0 -2px 0 #b7bcc8;
+}
+
+/* bottom half: keypad */
+.phone-bottom {
+  position: absolute;
+  top: 302px; left: 0; width: 252px; height: 178px;
+  background: #c4c9d2;
+  border-left: 3px solid #f2f4f8;
+  border-right: 3px solid #8b909c;
+  border-bottom: 3px solid #8b909c;
+  box-shadow: inset 0 6px 0 #d9dde4;
+}
+.phone-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 26px 0;
+}
+.phone-softkey {
+  width: 44px; height: 16px;
+  background: #dfe3ea;
+  box-shadow: inset 2px 2px 0 #f8fafc, inset -2px -2px 0 #8b909c;
+}
+.phone-dpad {
+  width: 56px; height: 30px;
+  background: #aab0bc;
+  box-shadow: inset 2px 2px 0 #d9dde4, inset -2px -2px 0 #6a707c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone-dpad i {
+  width: 22px; height: 14px;
+  background: #dfe3ea;
+  box-shadow: inset 2px 2px 0 #f8fafc, inset -2px -2px 0 #8b909c;
+}
+.phone-keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  padding: 12px 34px 0;
+}
+.phone-key {
+  height: 17px;
+  background: #e6eaf1;
+  box-shadow: inset 2px 2px 0 #ffffff, inset -2px -2px 0 #8b909c;
+  font-family: "Silkscreen", monospace;
+  font-size: 9px;
+  line-height: 17px;
+  text-align: center;
+  color: #232a36;
+}
+.phone-mic {
+  position: absolute;
+  bottom: 6px; left: 120px; width: 12px; height: 5px;
+  background: #14181e;
+}
+
+.phone-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Silkscreen", monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 2px 2px 0 rgba(8, 12, 50, 0.8);
 }
