@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { Stage, type StageCard } from "@/components/stage";
+import { PhoneIntro } from "@/components/phone-intro";
 
 export const revalidate = 300;
 
@@ -175,10 +176,12 @@ export default async function Home() {
   });
 
   return (
-    <Stage
-      cards={cards}
-      summary={attention ? `${latest}  ·  ${attention}` : latest}
-      date={dateStr}
-    />
+    <PhoneIntro>
+      <Stage
+        cards={cards}
+        summary={attention ? `${latest}  ·  ${attention}` : latest}
+        date={dateStr}
+      />
+    </PhoneIntro>
   );
 }
