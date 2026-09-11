@@ -17,6 +17,16 @@ export function FolderUnravel() {
   const [open, setOpen] = useState(false);
   const running = useRef(false);
   const els = useRef<(HTMLDivElement | null)[]>([]);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+
+  function scrollToSegment(i: number) {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const segH = stage.getBoundingClientRect().width * 0.62;
+    const stageTop = stage.getBoundingClientRect().top + window.scrollY;
+    const target = stageTop + (i + 1) * segH - window.innerHeight * 0.62;
+    window.scrollTo({ top: Math.max(0, target), behavior: "auto" });
+  }
 
   async function run() {
     if (running.current) return;
@@ -29,13 +39,21 @@ export function FolderUnravel() {
       el.style.visibility = "visible";
       const from = i === 0 ? 0 : 180;
       const to = i === 0 ? 180 : 0;
-      await animate(
+      const anim = animate(
         el,
         { rotateX: [from, to] },
         reduced
           ? { duration: 0 }
           : { duration: DURATIONS[i], ease: i === 0 ? [0.62, 0, 0.72, 0.32] : [0.42, 0, 0.58, 0.38] },
       );
+      if (reduced) {
+        scrollToSegment(i);
+      } else {
+        const follow = window.setInterval(() => scrollToSegment(i), 40);
+        await anim;
+        window.clearInterval(follow);
+        scrollToSegment(i);
+      }
     }
   }
 
@@ -54,9 +72,10 @@ export function FolderUnravel() {
         el.style.transform = `rotateX(${i === 0 ? 180 : 0}deg)`;
       } else if (i === k && p.has("mid")) {
         el.style.visibility = "visible";
-        el.style.transform = `rotateX(${i === 0 ? 95 : 95}deg)`;
+        el.style.transform = "rotateX(115deg)";
       }
     }
+    scrollToSegment(Math.min(k, SHEETS));
   }, []);
 
   // nested sheets: each hinged at the free end of the one before
@@ -81,7 +100,7 @@ export function FolderUnravel() {
   return (
     <main className="folder-page" onClick={run} role="button" aria-label="Open the folder" tabIndex={0}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") run(); }}>
-      <div className="folder-stage">
+      <div className="folder-stage" ref={stageRef}>
         <div className="folder-back">
           <span className="folder-tab" aria-hidden />
         </div>
