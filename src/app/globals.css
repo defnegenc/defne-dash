@@ -927,7 +927,6 @@ a.vchip:hover, button.vchip:hover {
 .folder-page {
   min-height: 100vh;
   cursor: pointer;
-  overflow: hidden;
 }
 .folder-stage {
   --fw: min(74vw, 420px);
@@ -935,7 +934,7 @@ a.vchip:hover, button.vchip:hover {
   position: relative;
   width: var(--fw);
   height: calc(var(--fh) * 7);
-  margin: 34vh auto 0;
+  margin: 30vh auto 45vh;
   perspective: 1800px;
 }
 .folder-back {
