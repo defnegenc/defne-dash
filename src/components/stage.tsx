@@ -138,6 +138,25 @@ function statusFor(card: StageCard, savedReads: SavedRead[]): string {
 }
 
 
+function wstatusFor(card: StageCard, savedReads: SavedRead[]): string {
+  if (card.kind === "idea") {
+    const dev = card.threads.filter((t) => t.status === "developing").length;
+    const res = card.threads.filter((t) => t.status === "researching").length;
+    return `${card.threads.length} threads - ${dev} developing - ${res} researching`;
+  }
+  if (card.kind === "news") {
+    const saved = savedReads.some((r) => r.id === card.id);
+    return `${card.source} - ${card.date} - ${saved ? "saved to favourites" : "not saved yet"}`;
+  }
+  if (card.kind === "prs") {
+    const ready = card.prs.filter((x) => x.state === "ready").length;
+    const stale = card.prs.filter((x) => x.state === "stale").length;
+    const merged = card.prs.filter((x) => x.state === "merged").length;
+    return `${card.prs.length} object(s) - ${ready} ready to merge - ${stale} stale - ${merged} merged`;
+  }
+  return `${card.curiosities.length} questions - researched \u2713`;
+}
+
 function cardLabel(card: StageCard): string {
   if (card.kind === "news") return card.title;
   if (card.kind === "idea") return card.title;
@@ -316,8 +335,8 @@ export function Stage({
       <div
         className="relative flex w-full max-w-[1120px] items-center justify-center"
         style={{
-          height: wide ? "min(66vh, 560px)" : "min(80vw, 560px)",
-          minHeight: wide ? 420 : 0,
+          height: wide ? "min(66vh, 560px)" : "min(70vh, 600px)",
+          minHeight: wide ? 420 : 380,
         }}
       >
         {cards.map((card, idx) => {
@@ -386,22 +405,19 @@ export function Stage({
                         </>
                       }
                     />
-                    <div className="vglass-panel flex-1 px-6 pb-5 pt-4">
+                    <div className="wdoc flex-1 min-h-0 overflow-y-auto px-5 pb-4 pt-3.5">
                       <div className="flex items-baseline justify-between gap-4">
-                        <h3 className="text-[17px] font-semibold leading-snug">
-                          {card.title}
-                        </h3>
-                        <span className="shrink-0 text-[13px] opacity-70">{card.date}</span>
+                        <h3 className="text-[18px] font-bold leading-snug">{card.title}</h3>
+                        <span className="shrink-0 text-[13px]">{card.date}</span>
                       </div>
                       {card.detail && (
-                        <p className="mt-2 text-[14px] leading-snug opacity-85">
-                          {card.detail}
-                        </p>
+                        <p className="mt-2 text-[14.5px] leading-snug">{card.detail}</p>
                       )}
-                      <p className="mt-2.5 text-[12px] tracking-wide opacity-55">
+                      <p className="mt-2.5 text-[12.5px] tracking-wide text-[#404040]">
                         {card.source} · {card.itemKind === "ai-daily" ? "Pinned daily" : "From your week"}
                       </p>
                     </div>
+                    <div className="wstatus"><span>{wstatusFor(card, savedReads)}</span></div>
                   </>
                 )}
                 {card.kind === "prs" && (
@@ -416,16 +432,13 @@ export function Stage({
                         </a>
                       }
                     />
-                    <div className="vglass-panel flex-1 overflow-y-auto px-5 pb-5 pt-4">
+                    <div className="vglass-panel flex flex-1 min-h-0 flex-col px-5 pb-4 pt-3.5">
                       <div className="flex items-baseline justify-between">
-                        <h3 className="text-[17px] font-semibold">
-                          PR pile
-                        </h3>
-                        <span className="text-[13px] opacity-70">
-                          {card.prs.length} open
-                        </span>
+                        <h3 className="text-[18px] font-bold">PR pile</h3>
+                        <span className="text-[13px]">{card.prs.length} open</span>
                       </div>
-                      <ul className="mt-3 flex flex-col gap-2">
+                      <div className="wlist mt-3 flex-1 min-h-0 overflow-y-auto">
+                      <ul className="flex flex-col">
                         {card.prs.map((pr) => {
                           const st = PR_WORD[pr.state];
                           return (
@@ -434,7 +447,7 @@ export function Stage({
                                 <span className="pr-mark">{st.mark}</span>
                                 <span className="font-semibold">PR {pr.number}</span>
                                 <span className="truncate">{pr.label}</span>
-                                <span className="ml-auto shrink-0 text-[12px] opacity-80">
+                                <span className="ml-auto shrink-0 text-[12.5px]">
                                   {pr.author === "agent" ? "Agent" : "You"} · {st.word}
                                 </span>
                               </a>
@@ -442,7 +455,9 @@ export function Stage({
                           );
                         })}
                       </ul>
+                      </div>
                     </div>
+                    <div className="wstatus"><span>{wstatusFor(card, savedReads)}</span></div>
                   </>
                 )}
                 {card.kind === "idea" && (
@@ -455,24 +470,26 @@ export function Stage({
                         <span className="vchip vchip-strong">{card.threads.length} threads</span>
                       </span>
                     </div>
-                    <div className="vglass-panel flex-1 overflow-y-auto px-5 pb-3 pt-3">
+                    <div className="vglass-panel flex flex-1 min-h-0 flex-col px-5 pb-3 pt-3">
                       <div className="flex items-baseline justify-between gap-4">
-                        <h3 className="text-[17px] font-semibold leading-snug">{card.title}</h3>
-                        <span className="shrink-0 text-[13px] opacity-70">idea</span>
+                        <h3 className="text-[18px] font-bold leading-snug">{card.title}</h3>
+                        <span className="shrink-0 text-[13px]">idea</span>
                       </div>
-                      <p className="idea-card-thesis mt-1 italic leading-tight opacity-85">{card.thesis}</p>
-                      <ul className="mt-2 flex flex-col gap-1.5">
+                      <p className="idea-card-thesis mt-1 italic leading-tight">{card.thesis}</p>
+                      <div className="wlist mt-2 flex-1 min-h-0 overflow-y-auto">
+                      <ul className="flex flex-col">
                         {card.threads.map((t) => (
                           <li key={t.id} className={`pr-row thread-row ${t.status === "researching" ? "thread-researching" : "pr-ready"}`}>
                             <span className="pr-mark">{t.status === "researching" ? "⌕" : "→"}</span>
                             <span className="min-w-0">
                               <span className="block truncate font-semibold">{t.label}</span>
-                              <span className="block truncate text-[11.5px] font-normal opacity-80">{t.note}</span>
+                              <span className="block truncate text-[12.5px] font-normal">{t.note}</span>
                             </span>
-                            <span className="ml-auto shrink-0 text-[12px] opacity-80">{t.status}</span>
+                            <span className="ml-auto shrink-0 text-[12.5px]">{t.status}</span>
                           </li>
                         ))}
                       </ul>
+                      </div>
                       <div className="axis-row">
                         {card.axes.map((x) => (
                           <span key={`${x.a}-${x.b}`} className="vchip axis">
@@ -484,6 +501,7 @@ export function Stage({
                         <span className="vchip axis axis-question">? {card.question}</span>
                       </div>
                     </div>
+                    <div className="wstatus"><span>{wstatusFor(card, savedReads)}</span></div>
                   </>
                 )}
                 {card.kind === "hw" && (
@@ -498,34 +516,33 @@ export function Stage({
                         </a>
                       }
                     />
-                    <div className="vglass-panel flex-1 overflow-y-auto px-5 pb-5 pt-4">
+                    <div className="vglass-panel flex flex-1 min-h-0 flex-col px-5 pb-4 pt-3.5">
                       <div className="flex items-baseline justify-between">
-                        <h3 className="text-[17px] font-semibold">
-                          Curiosity homework
-                        </h3>
-                        <span className="text-[13px] opacity-70">
-                          {card.curiosities.length} questions
-                        </span>
+                        <h3 className="text-[18px] font-bold">Curiosity homework</h3>
+                        <span className="text-[13px]">{card.curiosities.length} questions</span>
                       </div>
-                      <ul className="mt-3 flex flex-col gap-2">
+                      <div className="wlist mt-3 flex-1 min-h-0 overflow-y-auto">
+                      <ul className="flex flex-col">
                         {card.curiosities.map((c) => (
                           <li key={c.slug}>
                             <a href={`/curiosities/${c.slug}`} className="pr-row pr-ready">
                               <span className="pr-mark">→</span>
                               <span className="min-w-0">
                                 <span className="block truncate font-semibold">{c.question}</span>
-                                <span className="block truncate text-[12px] font-normal opacity-80">
+                                <span className="block truncate text-[12.5px] font-normal">
                                   {c.tagline}
                                 </span>
                               </span>
-                              <span className="ml-auto shrink-0 text-[12px] opacity-80">
+                              <span className="ml-auto shrink-0 text-[12.5px]">
                                 Researched ✓
                               </span>
                             </a>
                           </li>
                         ))}
                       </ul>
+                      </div>
                     </div>
+                    <div className="wstatus"><span>{wstatusFor(card, savedReads)}</span></div>
                   </>
                 )}
               </motion.div>
