@@ -137,6 +137,14 @@ function statusFor(card: StageCard, savedReads: SavedRead[]): string {
   return `Curiosity homework - ${card.curiosities.length} open questions`;
 }
 
+
+function cardLabel(card: StageCard): string {
+  if (card.kind === "news") return card.title;
+  if (card.kind === "idea") return card.title;
+  if (card.kind === "prs") return "PR pile";
+  return "Curiosity homework";
+}
+
 function glyphFor(itemKind: string): string {
   if (itemKind === "ai-daily") return "✦";
   if (itemKind === "topic") return "μ";
@@ -353,6 +361,12 @@ export function Stage({
                 transition={{ duration: 0.45, times: [0, 0.4, 0.72, 1], ease: "easeOut" }}
                 onAnimationComplete={() => center && setSquash(false)}
               >
+                <div className="wtitle">
+                  <span className="wtitle-text">{cardLabel(card)}</span>
+                  <span className="wtitle-btn" aria-hidden>_</span>
+                  <span className="wtitle-btn" aria-hidden>▢</span>
+                  <span className="wtitle-btn" aria-hidden>✕</span>
+                </div>
                 {card.kind === "news" && (
                   <>
                     <Visual
